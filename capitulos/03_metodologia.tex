@@ -1,0 +1,126 @@
+\chapter{METODOLOGIA}
+
+A metodologia adotada neste trabalho foi estruturada para orientar o desenvolvimento de uma plataforma centralizada de recepção e distribuição de dados financeiros para o Laboratório de Tecnologias Inovadoras (LTI), com ênfase em baixa latência, disponibilidade. O estudo combina investigação bibliográfica, definição de requisitos a partir de um problema real do laboratório, desenvolvimento incremental da solução e proposta de validação por meio de testes funcionais e experimentos quantitativos.
+
+\section{Visão geral da metodologia}
+
+O ponto de partida desta pesquisa é a necessidade de responder à questão proposta anteriormente: como fornecer, de forma centralizada, sem dependências do MT5 e com baixa latência, dados em tempo real e históricos do ativo Mini-Índice Ibovespa para os pesquisadores do LTI ? A partir desse problema, a metodologia foi organizada como um processo prático e iterativo, no qual a arquitetura da solução e dos experimentos, as implementações técnicas e os testes de validação evoluem em conjunto.
+
+Em vez de assumir um planejamento rígido e integral desde o início, como por exemplo um planejamento do tipo cascata, a proposta admite a incorporação gradual de requisitos e ajustes técnicos decorrentes das demandas advindas dos consumidores e das necessidades técnicas supervenientes. Tal dinamicidade exige, notavelmente, que haja um grau adequado de padronização de interfaces \textit{back-end} e camadas-\textit{controller} de dados no que diz respeito à API da plataforma.
+
+Para além de questões de integração, esse \textit{framework} é adequado porque muitos requisitos funcionais advêm de demandas de usuários reais do laboratório. Tais demandas, frequentemente, não são de conhecimento dos engenheiros. Em outras palavras, nós não temos pleno conhecimento do domínio-técnico ou domínio-funcional. Neste estudo, tal domínio consiste principalmente de estatística avançada, redes neurais e processos estocásticos. Assim, a metodologia visa um gerenciamento de projeto flexível o suficiente para acomodar diferentes necessidades, mas também suficientemente determinística para garantir a operabilidade contínua do ecossistema de serviços (\textit{feeder}, qDATA, \textit{dashboard}, etc).
+
+\section{Questões de pesquisa}
+
+Com base na pergunta principal do trabalho, foram definidas as seguintes questões de pesquisa, mais aderentes ao contexto do LTI:
+\begin{enumerate}
+    \item Como estruturar uma infraestrutura única e pública de dados financeiros a qual elimine ou reduza a necessidade de dependências de aquisição de dados (MT5, Polygon, etc)?
+    \item Quais componentes arquiteturais, protocolos de rede e \textit{frameworks} de alto desempenho são necessários para disponibilizar dados históricos e em tempo real com baixa latência e alta disponibilidade? (Exemplos: gRPC, gRPC-Web, TimescaleDB, \textit{websockets}, etc)
+    \item Como garantir a consistência e a atualização contínua dos dados ingeridos pela interface REST? (Exemplo: monitoração na interface REST com \textit{webhooks}, canais de comunicação ininterruptos)
+    \item Quais testes e métricas quantitativas permitem verificar se a plataforma atende aos requisitos de desempenho e disponibilidades? (Exemplos: vazão, disponibilidade, latência média por megabyte)
+\end{enumerate}
+
+Essas questões guiarão tanto o projeto quanto a implementação da avaliação da solução. A resposta a cada uma delas depende da combinação entre escolha tecnológica, desenho da arquitetura e validação experimental.
+
+\section{Fontes de conhecimento e delimitação do estudo}
+
+Não fazem parte do escopo a execução automática de ordens, a gestão de risco de estratégias de \textit{trading} e o desenvolvimento de ferramentas analíticas finais dos usuários. Nesse contexto, estamos criando uma solução de Market Data, isto é, provimento de dados de mercado em altíssima vazão em se tratando de baixar qualquer dado que já esteja no banco de dados – ainda que em quantidade grande (exemplo: 1Gb de dados) –. Por outro lado, está fora do escopo deste projeto prover dados extremamente atualizados (exemplo: dados que foram disponibilizados no \textit{broker} original há apenas 5 microssegundos atrás) com velocidade suficiente para execução de ordens de \textit{trading} (Order Routing). Convém reiterar: proveremos altíssima vazão, e dados suficientemente recentes para Market Data, mas não suficientemente recentes para Order Routing. Felizmente, a construção de um eventual microsserviço de Order Routing para esse ecossistema é uma tarefa extremamente elegante de um ponto de vista de engenharia de software, e extremamente veloz de um ponto de vista técnico, porém não iremos abordar isso neste trabalho.
+
+\section{Desenvolvimento incremental da solução}
+
+A implementação foi conduzida de forma incremental, partindo de um esboço macro da arquitetura dos serviços responsáveis pela ingestão, armazenamento e distribuição dos dados. Essa visão macro consiste na definição de três principais pontos:
+\begin{enumerate}
+    \item persistência de dados com PostgreSQL otimizado para séries temporais, utilizando as hyper-tabelas da extensão Timescale para armazenar os dados sem que a \textit{performance} seja comprometida à medida que o banco de dados cresce (algo que ocorreria eventualmente em tabelas tradicionais de qualquer SGBD relacional);
+    \item A utilização de gRPC e gRPC-Web na camada de aplicação da rede para a construção de \textit{endpoints} de alto desempenho voltados à distribuição de dados.
+    \item A utilização de um \textit{end-point} REST/HTTPS na camada de aplicação da rede para ingestão de dados (alimentação do sistema de banco de dados)
+\end{enumerate}
+
+\subsection{Especificação do Contrato de Dados}
+
+Por fim, os requisitos de domínios impostos aos engenheiros nos levaram a armazenar a categoria de dados \textit{Open, High, Low, Close, Volume} (OHLCV) (\textit{Open, High, Low, Close, Volume}) para o ativo Mini-Índice Ibovespa, com granularidade de 1 minuto, e a frequência de atualização é de 1 minuto para os dados em tempo real. A escolha por essa categoria de dados se deve ao fato de que ela é amplamente utilizada em análises financeiras e estratégias de \textit{trading}. A estrutura de dados (.proto) foi definida conforme o Código-fonte \ref{lst:ohlcbar} apresentado a seguir:
+
+\begin{lstlisting}[language=C, caption={Estrutura da mensagem OHLCBar em Protocol Buffers}, label={lst:ohlcbar}, frame=single, numbers=left]
+message OHLCBar {
+    // Optional fields
+    optional int64 id = 1;
+    optional string symbol = 2;
+    optional string timeframe = 3;
+    optional string source_id = 4;
+    optional int64 ingested_at = 5; // Unix timestamp
+    
+    // Required fields
+    int64 time = 6; // Unix timestamp in seconds
+    string time_utc = 7; // \gls{ISO} 8601 \gls{UTC}
+    string time_sp = 8; // \gls{ISO} 8601 Sao Paulo
+    double open = 9;
+    double high = 10;
+    double low = 11;
+    double close = 12;
+    int64 tick_volume = 13;
+    int64 spread = 14;
+    int64 real_volume = 15;
+}
+\end{lstlisting}
+
+A solução é implementada em módulos, de modo que cada parte possa ser testada isoladamente antes da integração completa. A arquitetura é orientada à separação de responsabilidades, para que a evolução de um componente não comprometa os demais, e nesse sentido faz uso amplo de \textit{containers} Docker. Desta forma: conseguimos construir três microsserviços: o \textit{feeder}, responsável pela ingestão de dados; o qDATA, responsável pela persistência e consulta dos dados; e o \textit{dashboard}, que não é o foco deste trabalho, mas apenas porque não somos os donos desse produto (`\textit{product ownership}'), e sua existência é para nós uma fonte de demandas ou fonte de requisitos.
+
+Uma regra de \textit{design} importante a ser integrada à arquitetura do presente ecossistema – o ecossistema em que o qData está inserido – é o princípio da independência de dados, descrito por Chris Richardson \cite{newman2015building}. Essa abordagem sugere que sistemas de banco de dados concentrados em um único nó com a finalidade de servir módulos cujos propósitos são distintos gerariam problemas de acoplamento complicados e, sobretudo, desnecessários. Ele discorre:
+
+\begin{citacao}
+Uma característica chave da arquitetura de microsserviços é que os serviços são fracamente acoplados e se comunicam apenas via APIs [...] Em tempo de desenvolvimento, os desenvolvedores podem alterar o esquema de um serviço sem precisarem coordenar com desenvolvedores que trabalham em outros serviços. Em tempo de execução, os serviços são isolados uns dos outros — por exemplo, um serviço nunca será bloqueado porque outro serviço detém um bloqueio no banco de dados.
+\end{citacao}
+
+Em termos práticos, isso implica, por exemplo, a utilização de um banco de dados no serviço qData (PostgreSQL) e um outro banco de dados próprio no serviço de cálculos (SQLite). Embora pudéssemos pensar em armazenar no qData dados numéricos provenientes de cálculos estatísticos – baseado na ideia de um ``centro de dados'' –, o princípio em discussão recomenda um banco de dados próprio para cada serviço, preferencialmente rodando em contêineres. Nesse sentido, podemos argumentar que um nó é uma API associada a um sistema de banco de dados independente.
+
+\section{Governança}
+
+A governança da arquitetura de microsserviços é fundamental para garantir a manutenibilidade, a segurança e a evolução padronizada do sistema. Esta seção descreve as principais diretrizes e políticas adotadas no contexto deste trabalho.
+
+\subsection{Versionamento de API}
+
+Para garantir a retrocompatibilidade e permitir a evolução contínua dos serviços sem impactar os clientes existentes, adota-se o versionamento de APIs. O versionamento é realizado explicitamente através do caminho na URL da API (por exemplo, \texttt{/api/v1/recurso} e \texttt{/api/v2/recurso}). Quando ocorrem mudanças que quebram a compatibilidade atual (\textit{breaking changes}), uma nova versão principal (\textit{major}) é disponibilizada, mantendo-se a versão anterior ativa por um período de transição pré-estabelecido (período de \textit{sunset}).
+
+\subsection{Políticas de Acesso por Perfil}
+
+O controle de acesso é gerenciado com base em perfis e papéis (\textit{Role-Based Access Control} - RBAC). A autenticação e a autorização são tratadas de forma centralizada (geralmente por meio de um API Gateway ou serviço de identidade dedicado), e as requisições repassadas aos microsserviços carregam as informações de acesso através de \textit{tokens} seguros, como JWT (\textit{JSON Web Tokens}). Os perfis determinam o nível de permissão (como leitura, escrita ou administração) de cada usuário, garantindo que as políticas de menor privilégio sejam aplicadas nas operações.
+
+\subsection{Ownership dos Microsserviços}
+
+Para garantir a responsabilidade e facilitar a escalabilidade organizacional, adota-se o conceito de propriedade (\textit{ownership}) bem definida. Cada microsserviço possui uma equipe responsável por todo o seu ciclo de vida, desde a concepção até a operação em produção (modelo \textit{build it, run it}). Essa abordagem reduz os gargalos de comunicação, garante a \textit{accountability} e assegura que a equipe tenha total domínio técnico e de negócio sobre o serviço pelo qual é responsável.
+
+\subsection{Gestão de Mudança}
+
+O processo de gestão de mudança estabelece que novas implementações, refatorações e correções sejam integradas de maneira segura e controlada. O fluxo de desenvolvimento apoia-se em práticas de Integração e Entrega Contínuas (CI/CD). Toda modificação no código passa por validações automáticas que incluem testes de unidade, testes de integração e análise estática de código. Além disso, mudanças arquiteturais e atualizações em contratos de API exigem revisão por pares (\textit{code review}) obrigatória antes da integração na ramificação principal (\textit{main branch}) e posterior promoção aos ambientes de homologação e produção.
+
+\section{Técnicas e testes aplicados}
+
+Para responder às questões de pesquisa, a metodologia combina técnicas de engenharia de software e validação experimental. Os testes funcionais verificam se os componentes executam corretamente as tarefas esperadas, como autenticação, ingestão, armazenamento e consulta. Os testes de integração avaliam a comunicação entre serviços e o comportamento da plataforma como um todo. Já os testes de desempenho medem latência, tempo de resposta, vazão e estabilidade sob carga, permitindo verificar se a centralização dos dados efetivamente reduz o esforço individual dos pesquisadores sem comprometer a experiência de uso.
+
+Além disso, A \textit{blueprint} deste projeto irá propor testes automatizados na etapa de integração contínua (combinação de \textit{workflow} do GitHub com \textit{scripts} \textit{shellscript}) visando manter a consistência do sistema durante sua evolução. Esse conjunto de testes tem o objetivo específico de garantir a robustez da construção e do desenvolvimento.
+
+\section{Métricas de avaliação}
+
+No eixo de desempenho, mediremos latência média, variabilidade da latência, tempo de resposta, vazão e capacidade de atendimento simultâneo. No eixo de confiabilidade, analisaremos a disponibilidade dos serviços, a estabilidade da ingestão, além de que realizaremos testes de carga com o \textit{framework} Locust.
+
+\section{Procedimento experimental}
+
+O procedimento experimental é composto pelas seguintes etapas:
+\begin{enumerate}
+    \item levantamento da necessidade do laboratório e definição das questões de pesquisa;
+    \item implementação incremental dos serviços de ingestão, persistência, autenticação e distribuição;
+    \item elaboração e execução de testes funcionais por meio de \textit{scripts} de Python com GitHub Actions e \textit{shellscript}
+    \item elaboração de testes de integração também via \textit{scripts} de Python com GitHub Actions e \textit{shellscript}
+    \item coleta e análise dos resultados obtidos, com comparação entre o comportamento esperado e o comportamento observado, e posterior exibição e discussão dos resultados
+\end{enumerate}
+
+Esse fluxo permite associar cada decisão de projeto a evidências observáveis, tornando a metodologia coerente com o caráter aplicado do trabalho.
+
+\section{Ameaças à validade}
+
+Entre as principais ameaças aos objetivos de nível de qualidade do serviço (\textit{Service Level Objective}) estão a dependência de serviços externos para obtenção dos dados, a variabilidade natural das cargas de consulta e a possibilidade de diferenças entre ambientes de desenvolvimento e de execução. Para mitigar esses efeitos, a avaliação deve priorizar cenários repetíveis, registrar as condições de teste e considerar o uso de cargas controladas sempre que possível. Adicionalmente, projetar a simulação do ambiente em nuvem deverá ser realizada.
+
+Outra limitação relevante é o fato de a plataforma ser avaliada em um contexto específico, o do LTI. Por isso, os resultados devem ser interpretados como evidência da adequação da solução às necessidades dos membros do LTI, ainda que a arquitetura possa ser adaptada futuramente para outros grupos ou projetos que tenham demandas semelhantes, sem prejuízo dos clientes já existentes ou alteração das interfaces. Tal extensão implicaria a necessidade de criação de novas instâncias do mesmo sistema, cujo direito de propriedade dos dados seria da entidade mantendo esses novos serviços de forma autônoma. Deixaremos especificados no projeto que uma eventual mudança das interfaces implicará, necessariamente, da disponibilização de uma nova versão da API, ou seja, a criação de rotas de API /v2/, /v3/, etc, de modo a garantir a compatibilidade com os clientes já existentes.
+
+\section{Síntese}
+
+Em síntese, a metodologia combina fundamentação teórica, desenvolvimento incremental e validação experimental para construir uma solução centralizada de dados financeiros voltada ao LTI. O foco do trabalho está em demonstrar que é possível oferecer acesso compartilhado a dados históricos e em tempo real com baixa latência, mantendo consistência, disponibilidade e reduzindo o esforço individual de integração por parte dos pesquisadores. Por fim, a metodologia visa aplicar os conhecimentos da grade curricular do Bacharelado em Engenharia de Software oferecido pelo Campus de Russas da Universidade Federal do Ceará, uma oportunidade de aplicação de técnicas de engenharia topo de linha. Definitivamente, esta metodologia é uma tentativa de orientar a construção de uma solução que atenda às exigências elementares de um projeto de engenharia de software profissional.

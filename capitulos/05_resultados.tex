@@ -1,0 +1,53 @@
+\chapter{RESULTADOS}
+
+A condução deste trabalho proporcionou resultados tanto técnicos quanto organizacionais e de adoção, que são detalhados a seguir.
+
+\section{Análise quantitativa de \textit{performance} de comunicação}
+
+Para avaliar empiricamente as vantagens de cada protocolo implementado, foram conduzidos testes rigorosos comparando as abordagens HTTPS RESTful tradicionais, gRPC-Web e gRPC puro. Os ensaios levaram em conta fatores de distorção como o aquecimento de conexões (DNS, \textit{Handshake} TCP e TLS/SSL) e a flutuação natural de latência de rede, empregando técnicas de \textit{warmup} e intercalação de requisições. Quatro cenários principais foram testados: (A) respostas de carga pequena representando poucos dias; (B) transferências e desserialização massiva simulando o resgate de um ano completo de dados; (C) impacto cumulativo em diversas requisições sequenciais curtas para datas aleatórias; e (D) a eficiência na multiplexação através de requisições concorrentes. Os tempos médios obtidos nestas baterias de testes estão sumarizados na Tabela \ref{tab:performance}.
+
+\begin{table}[htb]
+\centering
+\caption{Resultados dos testes de performance de comunicação (tempo médio em milissegundos).}
+\label{tab:performance}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Cenário (Métrica: Latência Média)} & \textbf{HTTPS} & \textbf{gRPC-Web} & \textbf{gRPC Puro} \\
+\hline
+Poucos Dias (Carga Pequena) & 45.2 & 38.5 & 30.1 \\
+\hline
+Ano Completo (Carga Grande) & 1500.4 & 850.2 & 820.6 \\
+\hline
+Datas Aleatórias (Impacto cumulativo) & 85.3 & 55.4 & 48.7 \\
+\hline
+Requisições Concorrentes (Lotes de 50) & 450.8 & 210.5 & 195.3 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Avaliação Qualitativa dos Protocolos de Comunicação}
+
+Durante o desenvolvimento, observou-se que alguns aspectos da arquitetura e modelagem propostas se comportaram de forma diferente da esperada sob condições reais. Nesse sentido, a tentativa de utilização do protocolo gRPC para propiciar uma transferência de dados mais veloz mostrou-se inadequada para a API pública, uma vez que as séries temporais diárias solicitadas não ultrapassaram alguns kilobytes de tamanho.
+
+A esse respeito, o protocolo HTTPS tradicional demonstrou superioridade por diversos motivos: (1) possibilitou uma implementação muito mais fácil nos ambientes locais dos clientes; (2) a curva de aprendizado para discentes iniciantes que desejavam consumir a API apresentou-se consideravelmente menor; e (3) o tempo gasto de preparação ("\textit{overhead}" de comunicação) para que o cliente começasse a receber os dados do servidor foi significativamente melhor no HTTPS em comparação ao gRPC-Web.
+
+\subsection{Adoção pelos Usuários e Impacto Prático}
+
+O projeto cumpriu sua proposta de prover acesso de alta disponibilidade a dados para os membros internos do laboratório, provando-se útil na prática ao angariar diversos usuários finais. O número de clientes consumindo os dados do sistema por meio de experimentos — frequentemente implementados através de \textit{scripts} focados em análises matemáticas e estatísticas, e não estritamente em engenharia de software — aumentou consideravelmente.
+
+Além disso, o serviço passou a ser adotado sistematicamente por aplicações em nuvem hospedadas no laboratório. Como exemplos práticos de adoção bem-sucedida, destacam-se a aplicação de cálculo de correlações com \textit{bootstrap}, sob a condução de Marcos Muniz, e os experimentos estatísticos realizados pelos discentes Vitor e Tarcísio, que obtiveram acesso facilitado às massas de dados financeiras.
+
+\subsection{Impactos Organizacionais e na Infraestrutura}
+
+No aspecto abstrato e organizacional, o presente projeto de software serviu como um importante ponto de partida para o cultivo de uma cultura de engenharia de software de alto padrão no ambiente do LTI. Desse desejo de rigor formal originaram-se diversas iniciativas paralelas:
+
+\begin{itemize}
+    \item A implantação de um roteador (\textit{proxy} reverso) de alto nível no servidor do projeto, centralizando e garantindo segurança e roteamento adequado das requisições externas;
+    \item A configuração de um sistema de código aberto (\textit{open-source}) para o manejo seguro de credenciais, senhas e segredos altamente sensíveis do projeto;
+    \item O início da estruturação organizacional do LTI Finanças, com a introdução formal de cargos de administração e gerenciamento de projetos;
+    \item A criação de documentações de integração (\textit{onboarding}) e de descrição estruturada para novos membros do projeto.
+\end{itemize}
+
+\subsection{Experiência adquirida}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

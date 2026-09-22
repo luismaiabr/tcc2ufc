@@ -1,0 +1,57 @@
+\changetocdepth {4}
+\babel@toc {brazil}{}\relax 
+\babel@toc {brazil}{}\relax 
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase []{INTRODUÇÃO}}{21}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Escopo}{24}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Objetivos}{26}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Objetivo Geral}{26}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Objetivos Específicos}{26}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Organização do Trabalho}{27}{section.1.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{FUNDAMENTAÇÃO TEÓRICA}}{29}{chapter.2}%
+\contentsline {section}{\numberline {2.1}O Ecossistema LTI FinHub}{29}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Arquitetura de Microsserviços}{30}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Coleta de Dados com Tickers Especializados}{31}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Contêineres e Docker}{31}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Compatibilidade de Binários em Ambientes Linux (Wine)}{32}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.5}Separação de Preocupações (Separation of Concerns)}{32}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Protocolos de Comunicação: REST/HTTP e gRPC}{33}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Bancos de Dados para Séries Temporais: TimescaleDB}{33}{section.2.7}%
+\contentsline {section}{\numberline {2.8}FastAPI e Programação Assíncrona (ASGI)}{34}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Estratégia de Upsert e Idempotência}{35}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Autenticação e Autorização com JWT e Supabase}{35}{section.2.10}%
+\contentsline {section}{\numberline {2.11}Desenvolvimento Incremental e Integração Contínua}{36}{section.2.11}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{METODOLOGIA}}{39}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Visão geral da metodologia}{39}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Questões de pesquisa}{39}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Fontes de conhecimento e delimitação do estudo}{40}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Desenvolvimento incremental da solução}{40}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Especificação do Contrato de Dados}{41}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Governança}{42}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Versionamento de API}{43}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Políticas de Acesso por Perfil}{43}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Ownership dos Microsserviços}{43}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Gestão de Mudança}{43}{subsection.3.5.4}%
+\contentsline {section}{\numberline {3.6}Técnicas e testes aplicados}{44}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Métricas de avaliação}{44}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Procedimento experimental}{44}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Ameaças à validade}{45}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Síntese}{45}{section.3.10}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{CRONOGRAMA}}{47}{chapter.4}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{RESULTADOS}}{49}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Análise quantitativa de \textit {performance} de comunicação}{49}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Avaliação Qualitativa dos Protocolos de Comunicação}{49}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Adoção pelos Usuários e Impacto Prático}{50}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Impactos Organizacionais e na Infraestrutura}{50}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Experiência adquirida}{50}{subsection.5.2.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONCLUSÕES E TRABALHOS FUTUROS}}{51}{chapter.6}%
+\vspace {\cftbeforechapterskip }

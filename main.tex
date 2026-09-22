@@ -1,0 +1,91 @@
+\documentclass[
+	12pt,
+	openright,
+	twoside,
+	a4paper,
+	english,
+	french,
+	spanish,
+	brazil
+	]{abntex2}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{lipsum}
+\usepackage{verbatim}
+\usepackage[brazilian,hyperpageref]{backref}
+\usepackage[alf]{abntex2cite}
+
+% Informações de dados para CAPA e FOLHA DE ROSTO
+\titulo{ARQUITETANDO O NÚCLEO DE DADOS DE UM ECOSSISTEMA DE ANÁLISE SÉRIES TEMPORAIS FINANCEIRAS}
+\autor{LUIS ANTÔNIO MAIA SOMBRA}
+\local{RUSSAS}
+\data{2026}
+\orientador{Prof. Ms. Pitágoras Graça Martins}
+\instituicao{%
+  UNIVERSIDADE FEDERAL DO CEARÁ
+  \par
+  CAMPUS DE RUSSAS
+  \par
+  DEPARTAMENTO DE COMPUTAÇÃO
+  \par
+  CURSO DE GRADUAÇÃO EM ENGENHARIA DE SOFTWARE}
+\tipotrabalho{Trabalho de Conclusão de Curso}
+\preambulo{Trabalho de Conclusão de Curso apresentado ao Curso de Graduação em Engenharia de Software do Campus de Russas da Universidade Federal do Ceará, como requisito parcial à obtenção do grau de bacharel em Engenharia de Software.}
+
+\begin{document}
+
+\selectlanguage{brazil}
+\frenchspacing
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+\imprimircapa
+\imprimirfolhaderosto
+
+% Inserir folha de aprovação
+\input{pre_textuais/folha_aprovacao}
+\input{pre_textuais/dedicatoria}
+\input{pre_textuais/agradecimentos}
+\input{pre_textuais/epigrafe}
+\input{pre_textuais/resumo}
+\input{pre_textuais/abstract}
+
+% Listas e Sumário
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+\input{capitulos/01_introducao}
+\input{capitulos/02_fundamentacao}
+\input{capitulos/03_metodologia}
+\input{capitulos/04_cronograma}
+\input{capitulos/05_resultados}
+\input{capitulos/06_conclusao}
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+\bibliography{referencias}
+
+\end{document}

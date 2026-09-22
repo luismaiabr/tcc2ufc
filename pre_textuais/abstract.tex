@@ -1,0 +1,10 @@
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+The growth of quantitative finance research in academia has highlighted the need for robust, high-performance financial data infrastructures. Within the Financial Time Series Analysis project at the Innovative Technologies Laboratory (LTI) of the Federal University of Ceará (UFC), Russas Campus, the lack of a centralized solution forced researchers to individually implement complex connections with market data providers. To address this issue, this work presents the design and development of the qDATA platform, a high-speed financial data infrastructure aimed at acquiring, storing, and distributing historical and real-time data (OHLC bars). The solution is based on a microservices architecture using Docker containers, comprising extraction modules operating MetaTrader 5 instances via Wine on Linux, integrated with brokerages. Data ingestion is handled through a FastAPI-based REST API, which stores records in a PostgreSQL database equipped with the TimescaleDB extension, optimized for time series data and employing an \textit{upsert} strategy. To deliver data to end consumers with low latency, the system utilizes high-performance gRPC channels, while also ensuring security and granular access control via JWT and Supabase. The architecture adheres to the separation of concerns principle, providing data as a service and isolating the infrastructure from analytical tools. The system was validated through a real analytical dashboard by real users, demonstrating efficiency by eliminating redundancies and allowing researchers to focus on the development of their mathematical models and quantitative strategies.
+
+   \vspace{\onelineskip}
+ 
+   \noindent 
+   \textbf{Keywords}: Financial Time Series. Microservices Architecture. Docker. TimescaleDB. gRPC.
+ \end{otherlanguage*}
+\end{resumo}
