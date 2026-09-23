@@ -14,11 +14,13 @@ Para além de questões de integração, esse \textit{framework} é adequado por
 
 Com base na pergunta principal do trabalho, foram definidas as seguintes questões de pesquisa, mais aderentes ao contexto do LTI:
 \begin{enumerate}
-    \item Como estruturar uma infraestrutura única e pública de dados financeiros a qual elimine ou reduza a necessidade de dependências de aquisição de dados (MT5, Polygon, etc)?
+    \item Como estruturar uma infraestrutura única e interna de dados financeiros a qual centralize e abstraia as integrações de aquisição de dados (MT5, Polygon, etc)?
     \item Quais componentes arquiteturais, protocolos de rede e \textit{frameworks} de alto desempenho são necessários para disponibilizar dados históricos e em tempo real com baixa latência e alta disponibilidade? (Exemplos: gRPC, gRPC-Web, TimescaleDB, \textit{websockets}, etc)
     \item Como garantir a consistência e a atualização contínua dos dados ingeridos pela interface REST? (Exemplo: monitoração na interface REST com \textit{webhooks}, canais de comunicação ininterruptos)
     \item Quais testes e métricas quantitativas permitem verificar se a plataforma atende aos requisitos de desempenho e disponibilidades? (Exemplos: vazão, disponibilidade, latência média por megabyte)
 \end{enumerate}
+
+Vale ressaltar que a plataforma não elimina completamente a dependência de fontes externas, mas sim abstrai o processo de obtenção dos dados, deixando as reais dependências a cargo exclusivo da própria API (qDATA) e do módulo \textit{feeder} (como o mt5bridge). O objetivo é facilitar o trabalho dos pesquisadores ao remover o \textit{overhead} de implementação de tecnologias como o MetaTrader 5 (MT5). Essa abstração ocorre não apenas por conveniência de desenvolvimento, mas para garantir que as aplicações analíticas rodem em modo \textit{headless} em servidores baseados em Linux. Isso viabiliza estudos que dependem de operação contínua: mesmo quando o pesquisador encerra sua sessão ou fecha o computador pessoal, a aplicação objeto de sua pesquisa continua executando de maneira autônoma e recebendo dados. Sendo o qDATA projetado para uso estritamente interno do LTI, o seu consumo é feito exclusivamente por pesquisadores que necessariamente devem requerer credenciais junto à administração do projeto.
 
 Essas questões guiarão tanto o projeto quanto a implementação da avaliação da solução. A resposta a cada uma delas depende da combinação entre escolha tecnológica, desenho da arquitetura e validação experimental.
 
