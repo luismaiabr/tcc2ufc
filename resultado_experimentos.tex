@@ -1,0 +1,67 @@
+\subsection{Cenário 2 — Volume Intermediário (Aleatório A)}
+\label{sec:cenario2}
+
+O segundo cenário simula consultas de volume intermediário, representando
+janelas de pregão mais extensas. Cada execução retornou \textbf{301~barras}
+OHLC~M1 — correspondendo a aproximadamente 5~horas de dados de mercado. O
+aumento de volume permite observar como cada protocolo escala a partir da
+latência de base observada no Cenário~1, especialmente no que diz respeito ao
+throughput e ao tamanho do payload.
+
+\begin{table}[H]
+  \centering
+  \caption{Cenário~2 — Volume Intermediário: métricas agregadas
+    (301~barras/execução).}
+  \label{tab:cenario2-summary}
+  \begin{tabular}{l S[table-format=4.2] S[table-format=4.2] S[table-format=4.2]}
+    \toprule
+    \textbf{Métrica} & {\textbf{HTTPS}} & {\textbf{gRPC-Web}} & {\textbf{gRPC Nativo}} \\
+    \midrule
+    Latência média (ms)        & 207,19  & 314,18  & 241,69  \\
+    Latência mediana (ms)      & 187,37  & 342,50  & 238,01  \\
+    Percentil 95 (ms)          & 296,83  & 394,59  & 287,05  \\
+    Percentil 99 (ms)          & 296,83  & 394,59  & 287,05  \\
+    Latência mínima (ms)       & 174,21  & 209,40  & 210,18  \\
+    Latência máxima (ms)       & 296,83  & 394,59  & 287,05  \\
+    Throughput médio (bars/s)  & 1508,08 & 1012,86 & 1258,20 \\
+    Total de barras recebidas  & {1.505}    & {1.505}    & {1.505}    \\
+    Barras por execução        & {301}     & {301}     & {301}     \\
+    Taxa de erro               & {0}       & {0}       & {0}       \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ─── Cenário 3a ───────────────────────────────────────────────────────────────
+\subsection{Cenário 3a — Alto Volume (Janela de 2 meses)}
+\label{sec:cenario3a}
+
+O terceiro cenário, em sua primeira variante, introduz alto volume de dados
+com uma janela de consulta de aproximadamente 2~meses (01/01/2026 a
+01/03/2026). Cada execução retornou \textbf{16.865~barras} OHLC~M1. Neste
+cenário, a diferença arquitetural entre os protocolos se torna mais evidente:
+o HTTPS/REST necessita de múltiplas requisições paginadas para obter o
+conjunto completo de dados, enquanto os protocolos gRPC utilizam
+\textit{server-streaming} em uma única chamada.
+
+\begin{table}[H]
+  \centering
+  \caption{Cenário~3a — Alto Volume (2~meses): métricas agregadas
+    (16.865~barras/execução).}
+  \label{tab:cenario3a-summary}
+  \begin{tabular}{l S[table-format=5.2] S[table-format=5.2] S[table-format=5.2]}
+    \toprule
+    \textbf{Métrica} & {\textbf{HTTPS}} & {\textbf{gRPC-Web}} & {\textbf{gRPC Nativo}} \\
+    \midrule
+    Latência média (ms)        & 8145,18 & 4259,45 & 4264,11 \\
+    Latência mediana (ms)      & 7219,69 & 3993,21 & 4150,32 \\
+    Percentil 95 (ms)          & 11877,38 & 5522,02 & 4837,24 \\
+    Percentil 99 (ms)          & 11877,38 & 5522,02 & 4837,24 \\
+    Latência mínima (ms)       & 6963,56 & 3473,75 & 4035,85 \\
+    Latência máxima (ms)       & 11877,38 & 5522,02 & 4837,24 \\
+    Throughput médio (bars/s)  & 2156,82 & 4070,72 & 3972,01 \\
+    Total de barras recebidas  & {84.325}   & {84.325}   & {84.325}   \\
+    Barras por execução        & {16.865}   & {16.865}   & {16.865}   \\
+    Taxa de erro               & {0}       & {0}       & {0}       \\
+    \bottomrule
+  \end{tabular}
+\end{table}
