@@ -11,7 +11,7 @@ Para avaliar empiricamente as vantagens de cada protocolo implementado, foram co
 
 O primeiro cenário simula respostas de carga pequena representando consultas de poucos dias. Este é o caso de uso mais comum na utilização diária da API por clientes finais. A latência média observada revelou tempos de resposta muito baixos para todos os protocolos.
 
-\begin{table}[H]
+\begin{table}[htb]
   \centering
   \caption{Cenário 1 — Baixo Volume: latência média agregada (poucos dias).}
   \label{tab:cenario1-summary}
@@ -32,7 +32,7 @@ Este cenário introduz um alto volume de dados com uma janela de consulta de apr
 
 A análise empírica deste cenário demonstra de forma contundente a superioridade do gRPC no tráfego para requisições maiores. Conforme observado na Tabela \ref{tab:cenario3a-summary}, a latência média do gRPC nativo (~4.264 ms) foi equivalente a quase metade da latência observada no protocolo HTTPS (~8.145 ms), refletindo ganhos expressivos de throughput e eficiência.
 
-\begin{table}[H]
+\begin{table}[htb]
   \centering
   \caption{Cenário~3a — Alto Volume (2~meses): métricas agregadas
     (16.865~barras/execução).}
