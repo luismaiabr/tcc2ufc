@@ -49,11 +49,12 @@
 \contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{RESULTADOS}}{49}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Análise quantitativa de \textit {performance} de comunicação}{49}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Cenário 1 — Baixo Volume}{49}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Cenário 3a — Alto Volume (Janela de 2 meses)}{49}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Avaliação Qualitativa dos Protocolos de Comunicação}{50}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Adoção pelos Usuários e Impacto Prático}{50}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.1.2}Cenário 2 — Volume Intermediário (Aleatório A)}{49}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Cenário 3a — Alto Volume (Janela de 2 meses)}{50}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}Avaliação Qualitativa dos Protocolos de Comunicação}{51}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Adoção pelos Usuários e Impacto Prático}{51}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2}Impactos Organizacionais e na Infraestrutura}{51}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Experiência adquirida}{51}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.3}Experiência adquirida}{52}{subsection.5.2.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONCLUSÕES E TRABALHOS FUTUROS}}{53}{chapter.6}%
 \vspace {\cftbeforechapterskip }

@@ -11,15 +11,44 @@ Para avaliar empiricamente as vantagens de cada protocolo implementado, foram co
 
 O primeiro cenário simula respostas de carga pequena representando consultas de poucos dias. Este é o caso de uso mais comum na utilização diária da API por clientes finais. A latência média observada revelou tempos de resposta muito baixos para todos os protocolos.
 
-\begin{table}[htb]
+\begin{table}[H]
   \centering
   \caption{Cenário 1 — Baixo Volume: latência média agregada (poucos dias).}
   \label{tab:cenario1-summary}
-  \begin{tabular}{l c c c}
+  \begin{tabular}{l S[table-format=3.2] S[table-format=3.2] S[table-format=3.2]}
     \toprule
-    \textbf{Métrica} & \textbf{HTTPS} & \textbf{gRPC-Web} & \textbf{gRPC Puro} \\
+    \textbf{Métrica} & {\textbf{HTTPS}} & {\textbf{gRPC-Web}} & {\textbf{gRPC Puro}} \\
     \midrule
     Latência média (ms) & 45,2 & 38,5 & 30,1 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ─── Cenário 2 ────────────────────────────────────────────────────────────────
+\subsection{Cenário 2 — Volume Intermediário (Aleatório A)}
+\label{sec:cenario2}
+
+O segundo cenário simula consultas de volume intermediário, representando janelas de pregão mais extensas. Cada execução retornou \textbf{301~barras} OHLC~M1 — correspondendo a aproximadamente 5~horas de dados de mercado. O aumento de volume permite observar como cada protocolo escala a partir da latência de base observada no Cenário~1, especialmente no que diz respeito ao throughput e ao tamanho do payload.
+
+\begin{table}[H]
+  \centering
+  \caption{Cenário~2 — Volume Intermediário: métricas agregadas
+    (301~barras/execução).}
+  \label{tab:cenario2-summary}
+  \begin{tabular}{l S[table-format=4.2] S[table-format=4.2] S[table-format=4.2]}
+    \toprule
+    \textbf{Métrica} & {\textbf{HTTPS}} & {\textbf{gRPC-Web}} & {\textbf{gRPC Nativo}} \\
+    \midrule
+    Latência média (ms)        & 207,19  & 314,18  & 241,69  \\
+    Latência mediana (ms)      & 187,37  & 342,50  & 238,01  \\
+    Percentil 95 (ms)          & 296,83  & 394,59  & 287,05  \\
+    Percentil 99 (ms)          & 296,83  & 394,59  & 287,05  \\
+    Latência mínima (ms)       & 174,21  & 209,40  & 210,18  \\
+    Latência máxima (ms)       & 296,83  & 394,59  & 287,05  \\
+    Throughput médio (bars/s)  & 1508,08 & 1012,86 & 1258,20 \\
+    Total de barras recebidas  & {1.505}    & {1.505}    & {1.505}    \\
+    Barras por execução        & {301}     & {301}     & {301}     \\
+    Taxa de erro               & {0}       & {0}       & {0}       \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -32,7 +61,7 @@ Este cenário introduz um alto volume de dados com uma janela de consulta de apr
 
 A análise empírica deste cenário demonstra de forma contundente a superioridade do gRPC no tráfego para requisições maiores. Conforme observado na Tabela \ref{tab:cenario3a-summary}, a latência média do gRPC nativo (~4.264 ms) foi equivalente a quase metade da latência observada no protocolo HTTPS (~8.145 ms), refletindo ganhos expressivos de throughput e eficiência.
 
-\begin{table}[htb]
+\begin{table}[H]
   \centering
   \caption{Cenário~3a — Alto Volume (2~meses): métricas agregadas
     (16.865~barras/execução).}
