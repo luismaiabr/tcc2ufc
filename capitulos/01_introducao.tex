@@ -62,7 +62,9 @@ O acesso à plataforma é protegido por autenticação baseada em \textit{JSON W
 
 A plataforma qDATA abrange a ingestão de dados de corretoras selecionadas, o armazenamento e a distribuição desses dados para consumidores internos do grupo de pesquisa LTI, com foco no projeto \textit{Análise de Séries Financeiras}. Dentro do escopo técnico estão a comunicação com um software de aquisição de barras \textit{Open, High, Low, Close} (OHLC), o armazenamento otimizado com hyper-tabelas através do TimeScale — o que viabiliza a entrega de dados em alta velocidade aos consumidores autorizados — e a disponibilização desses dados via HTTPS, visando cenários que exigem praticidade e agilidade no desenvolvimento de aplicações.
 
-Ao longo deste trabalho, também são analisadas as políticas de acesso a dados, o registro e ativação de usuários, o gerenciamento de contas do projeto e outras questões de segurança que impactam diretamente a ferramenta qDATA e o ecossistema como um todo. Assim, partindo da ferramenta qDATA como elemento central, o escopo se expande radialmente para uma visão arquitetural mais ampla, englobando o apoio à governança de TI do projeto \textit{LTI Finanças}.
+#continue here - revisão
+
+Ao longo deste trabalho, também são analisadas as políticas de acesso a dados, o registro e ativação de usuários, o gerenciamento de contas do projeto e outras questões de segurança que impactam diretamente a ferramenta qDATA e o ecossistema como um todo. Assim, partindo da ferramenta qDATA como elemento central, o escopo se expande radialmente para uma visão arquitetural mais ampla, englobando o apoio ao gerenciamento do projeto \textit{LTI Finanças}.
 
 \begin{figure}[H]
     \centering
@@ -71,7 +73,7 @@ Ao longo deste trabalho, também são analisadas as políticas de acesso a dados
     \label{fig:demandas_nucleo}
 \end{figure}
 
-Por outro lado, estão categoricamente fora do escopo desta plataforma: a execução de ordens de compra e venda nas corretoras, a gestão de risco financeiro e o desenvolvimento de interfaces de \textit{trading} para usuários finais. O qDATA atua exclusivamente como infraestrutura de dados compartilhada, cabendo à lógica de análise e negociação permanecer sob a estrita responsabilidade de cada ferramenta ou pesquisador consumidor.
+Por outro lado, estão categoricamente fora do escopo desta plataforma: a execução de ordens de compra e venda nas corretoras, a gestão de risco financeiro e o desenvolvimento de interfaces de \textit{trading} para usuários finais. O qData atua exclusivamente como infraestrutura de dados, cabendo à lógica de análise e negociação permanecer sob a estrita responsabilidade de cada ferramenta ou pesquisador consumidor.
 
 \section{Objetivos}
 
@@ -82,18 +84,25 @@ Projetar e implementar uma plataforma de dados financeiros centralizada e orient
 \subsection{Objetivos Específicos}
 
 \begin{itemize}
-    \item Integrar a plataforma com os \textit{containers} Docker de aquisição de dados do MetaTrader 5 (MT5), os quais operam em ambiente Linux utilizando Wine;
+    \item Consumir a plataforma com os \textit{containers} Docker de aquisição de dados do MetaTrader 5 (MT5), os quais operam em ambiente Linux utilizando Wine;
     \item Desenvolver o núcleo de ingestão e armazenamento de dados empregando o \textit{framework} FastAPI e o banco de dados PostgreSQL, mediado por protocolo HTTPS REST;
-    \item Implementar serviços de distribuição de dados aos consumidores utilizando o protocolo gRPC;
-    \item Disponibilizar uma interface HTTPS análoga ao serviço gRPC, provendo \textit{endpoints} mais amigáveis e flexíveis para desenvolvedores iniciantes ou colaboradores que priorizam agilidade de prototipagem;
-    \item Integrar a arquitetura a um sistema de autenticação e autorização via Supabase e JWT, viabilizando um controle de acesso granular que diferencia permissões de leitura e gravação através de um atributo de modo de usuário;
-    \item Estabelecer mecanismos iniciais para a garantia de disponibilidade, abrangendo a implementação de testes unitários (via \texttt{pytest}) e o planejamento de fluxos de integração contínua (GitHub Actions), que utilizam estes testes.
-    \item Implementar um ambiente de \textit{staging} em nosso servidor
-    \item Validar a robustez da plataforma com consumidores reais do LTI por meio da alimentação do \textit{dashboard} analítico;
-    \item Comparar o desempenho das interfaces de distribuição (gRPC, gRPC-Web e HTTPS) em termos de latência e consumo de banda, gerando histogramas para avaliação da variância métrica;
+    \item Implementar serviços de distribuição de dados aos consumidores utilizando os protocolos gRPC, gRPC-web e HTTPS;
+    \item Estabelecer mecanismos iniciais para a garantia de disponibilidade, abrangendo a implementação de testes unitários (via \texttt{pytest}) e a implementação de fluxos de integração contínua (GitHub Actions), que utilizam estes testes.
+    \item Comparar o desempenho das interfaces de distribuição (gRPC, gRPC-Web e HTTPS) em termos de latência e consumo de banda
     \item Documentar formalmente as políticas de controle de acesso e versionamento como prática basilar de governança de TI;
 \end{itemize}
 
+\newpage
 \section{Organização do Trabalho}
 
-Este trabalho está organizado em seis capítulos, incluindo esta introdução. O Capítulo 2 aborda a fundamentação teórica que dá suporte às decisões de \textit{design} e às tecnologias empregadas na plataforma. O Capítulo 3 descreve, de modo pragmático, a metodologia adotada para o desenvolvimento do projeto. O Capítulo 4 apresenta o cronograma das atividades. O Capítulo 5 detalha os resultados técnicos, organizacionais e de adoção obtidos ao longo do trabalho. Por fim, o Capítulo 6 traz a conclusão, delineando as considerações finais e os possíveis trabalhos futuros.
+Este trabalho está organizado em seis capítulos, estruturados da seguinte forma:
+
+\begin{itemize}
+    \item \textbf{Capítulo 1 -- Introdução:} Apresenta a contextualização do problema, a justificativa para a criação da plataforma, bem como o escopo e os objetivos estabelecidos.
+    \item \textbf{Capítulo 2 -- Fundamentação Teórica:} Aborda os conceitos que dão suporte às decisões de \textit{design} arquitetural e explora as principais tecnologias, \textit{frameworks} e protocolos utilizados no projeto.
+    \item \textbf{Capítulo 3 -- Metodologia:} Descreve, de modo pragmático, os procedimentos, técnicas e ferramentas empregados ao longo do desenvolvimento, da concepção à implementação.
+    \item \textbf{Capítulo 4 -- Cronograma:} Apresenta o planejamento de tempo do projeto, detalhando a distribuição das etapas de desenvolvimento e a evolução das atividades.
+    \item \textbf{Capítulo 5 -- Resultados:} Detalha os resultados técnicos, organizacionais e de adoção obtidos, incluindo avaliações de desempenho da plataforma no ecossistema de serviços.
+    \item \textbf{Capítulo 6 -- Conclusão:} Expõe as considerações finais do estudo, o grau de atingimento dos objetivos propostos e traça perspectivas para trabalhos futuros.
+\end{itemize}
+\newpage
