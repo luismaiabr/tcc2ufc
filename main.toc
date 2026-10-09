@@ -25,7 +25,7 @@
 \contentsline {section}{\numberline {2.8}FastAPI e Programação Assíncrona (ASGI)}{34}{section.2.8}%
 \contentsline {section}{\numberline {2.9}Estratégia de Upsert e Idempotência}{35}{section.2.9}%
 \contentsline {section}{\numberline {2.10}Autenticação e Autorização com JWT e Supabase}{36}{section.2.10}%
-\contentsline {section}{\numberline {2.11}Desenvolvimento Incremental e Integração Contínua}{37}{section.2.11}%
+\contentsline {section}{\numberline {2.11}Desenvolvimento Incremental e Integração Contínua}{36}{section.2.11}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{METODOLOGIA}}{39}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Visão geral da metodologia}{39}{section.3.1}%
@@ -58,5 +58,3 @@
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONCLUSÕES E TRABALHOS FUTUROS}}{53}{chapter.6}%
 \vspace {\cftbeforechapterskip }
-\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias Bibliogr\'aficas}}{55}{section*.16}%

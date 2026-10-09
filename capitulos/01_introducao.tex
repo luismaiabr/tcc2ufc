@@ -62,7 +62,6 @@ O acesso à plataforma é protegido por autenticação baseada em \textit{JSON W
 
 A plataforma qDATA abrange a ingestão de dados de corretoras selecionadas, o armazenamento e a distribuição desses dados para consumidores internos do grupo de pesquisa LTI, com foco no projeto \textit{Análise de Séries Financeiras}. Dentro do escopo técnico estão a comunicação com um software de aquisição de barras \textit{Open, High, Low, Close} (OHLC), o armazenamento otimizado com hyper-tabelas através do TimeScale — o que viabiliza a entrega de dados em alta velocidade aos consumidores autorizados — e a disponibilização desses dados via HTTPS, visando cenários que exigem praticidade e agilidade no desenvolvimento de aplicações.
 
-#continue here - revisão
 
 Ao longo deste trabalho, também são analisadas as políticas de acesso a dados, o registro e ativação de usuários, o gerenciamento de contas do projeto e outras questões de segurança que impactam diretamente a ferramenta qDATA e o ecossistema como um todo. Assim, partindo da ferramenta qDATA como elemento central, o escopo se expande radialmente para uma visão arquitetural mais ampla, englobando o apoio ao gerenciamento do projeto \textit{LTI Finanças}.
 
@@ -98,11 +97,16 @@ Projetar e implementar uma plataforma de dados financeiros centralizada e orient
 Este trabalho está organizado em seis capítulos, estruturados da seguinte forma:
 
 \begin{itemize}
-    \item \textbf{Capítulo 1 -- Introdução:} Apresenta a contextualização do problema, a justificativa para a criação da plataforma, bem como o escopo e os objetivos estabelecidos.
-    \item \textbf{Capítulo 2 -- Fundamentação Teórica:} Aborda os conceitos que dão suporte às decisões de \textit{design} arquitetural e explora as principais tecnologias, \textit{frameworks} e protocolos utilizados no projeto.
-    \item \textbf{Capítulo 3 -- Metodologia:} Descreve, de modo pragmático, os procedimentos, técnicas e ferramentas empregados ao longo do desenvolvimento, da concepção à implementação.
-    \item \textbf{Capítulo 4 -- Cronograma:} Apresenta o planejamento de tempo do projeto, detalhando a distribuição das etapas de desenvolvimento e a evolução das atividades.
-    \item \textbf{Capítulo 5 -- Resultados:} Detalha os resultados técnicos, organizacionais e de adoção obtidos, incluindo avaliações de desempenho da plataforma no ecossistema de serviços.
-    \item \textbf{Capítulo 6 -- Conclusão:} Expõe as considerações finais do estudo, o grau de atingimento dos objetivos propostos e traça perspectivas para trabalhos futuros.
+    \item \textbf{Capítulo 1 -- Introdução:} Apresenta a contextualização do problema enfrentado pelos pesquisadores do Laboratório de Tecnologias Inovadoras (LTI) no acesso a dados financeiros. Expõe a justificativa para a criação da plataforma, definindo claramente a questão norteadora, o escopo do projeto e os objetivos geral e específicos a serem alcançados.
+    
+    \item \textbf{Capítulo 2 -- Fundamentação Teórica:} Aborda os conceitos teóricos que embasam as decisões arquiteturais da plataforma. São explorados temas como microsserviços, estratégias de ingestão e armazenamento de grandes volumes de dados e modelagem de séries temporais. Além disso, detalha as tecnologias adotadas, como \textit{containers} Docker, o banco de dados PostgreSQL com a extensão TimeScale, além dos protocolos de comunicação gRPC, gRPC-Web e REST/HTTPS.
+    
+    \item \textbf{Capítulo 3 -- Metodologia:} Detalha o processo de desenvolvimento do sistema de forma pragmática, desde a concepção arquitetural até a implementação. O capítulo descreve a modelagem do sistema, a implementação da persistência (utilizando hyper-tabelas e estratégia de \textit{Upsert}), a construção das interfaces de distribuição, além da estruturação dos testes automatizados e fluxos de integração contínua (CI).
+    
+    \item \textbf{Capítulo 4 -- Cronograma:} Apresenta o planejamento temporal de todas as atividades envolvidas no trabalho. Expõe como as etapas de levantamento de requisitos, implementação das funcionalidades, testes, validação e escrita do documento foram distribuídas ao longo dos meses de execução do projeto.
+    
+    \item \textbf{Capítulo 5 -- Resultados:} Expõe e discute os resultados obtidos com o funcionamento do sistema em produção. O capítulo engloba avaliações e métricas de desempenho, comparando os meios de distribuição (gRPC, gRPC-Web e HTTPS). Também detalha o sistema de segurança e controle granular de acessos (via Supabase) e relata a efetiva adoção da plataforma pelos pesquisadores do ecossistema do LTI Finanças.
+    
+    \item \textbf{Capítulo 6 -- Conclusão:} Delineia as considerações finais sobre o trabalho realizado, verificando o cumprimento dos objetivos propostos. Discute as limitações técnicas ou organizacionais da solução desenvolvida e enumera propostas de melhorias e trabalhos futuros para a evolução contínua da infraestrutura de dados.
 \end{itemize}
 \newpage
