@@ -1,15 +1,41 @@
 \chapter{CONCLUSÕES E TRABALHOS FUTUROS}
 
-A partir do estudo acadêmico realizado e do trabalho dedicado a este sistema enquanto atividade laboral no LTI, conclui-se que o projeto de criação de um núcleo de informações centralizado no ambiente Linux foi extremamente produtivo e provou-se altamente útil para seus usuários.
+Este capítulo encerra o trabalho, retomando os objetivos propostos e discutindo os resultados obtidos em diversas frentes (técnica e organizacional), além de sugerir direções para projetos subsequentes.
 
-Como visto, o uso do protocolo gRPC enquanto interface de API externa voltada a clientes finais não trouxe os benefícios de \textit{performance} esperados em requisições cotidianas. Em outas palavras, o pequeno volume de dados (da ordem de kilobytes) e ao "\textit{overhead}" de construção do código inicial que consome essa API externa gRPC não supera em termos absolutos a baixa curva de aprendizado do protocolo HTTPS. No entanto, os resultados empíricos sugerem uma possibilidade do uso de gRPC em cenários de alta demanda. Conforme evidenciado no Cenário 3a (Alto Volume), a latência média do gRPC reduziu-se à metade em comparação ao HTTPS para o tráfego de dados massivos, comprovando ganhos no \textit{throughput}.
+\section{Considerações Finais e Cumprimento dos Objetivos}
+% SUGESTÃO DE CONTEÚDO: 
+% - Faça um resumo do que foi construído (o núcleo centralizado no ambiente Linux).
+% - Afirme se os objetivos gerais e específicos definidos na introdução foram alcançados.
+% - Destaque o valor que a plataforma entregou (utilidade para os pesquisadores).
 
-Dessa forma, como trabalhos futuros, recomenda-se que a tecnologia gRPC seja aplicada na comunicação interna de altíssimo rendimento entre microsserviços do próprio ecossistema no servidor (como entre \textit{backends} e bancos de dados, sem exposição à Internet), ambiente arquitetural ideal para explorar sua máxima eficiência. Por outro lado, não se recomenda seu uso para realizar experimentos com Python, para alimentação de dashboards, e para a prototipação de novos serviços.
+A partir do estudo acadêmico realizado e do trabalho dedicado a este sistema enquanto atividade laboral no LTI, conclui-se que o projeto de criação de um núcleo de informações centralizado provou-se extremamente produtivo e altamente útil para seus usuários, sanando uma dor real dos pesquisadores no acesso a séries financeiras.
 
-Em relação ao impacto estrutural e organizacional, as atividades formais de engenharia de software introduzidas por este projeto evidenciaram à liderança que novas estruturas a nível de gerenciamento e governança não são apenas importantes, mas estritamente necessárias para a maturidade do LTI Finanças. A esse respeito, a tentativa de implementação de uma estrutura organizacional mais robusta não foi tão eficiente quanto utilizar uma estrutura mais simples: um tech lead e um gestor na gerência, e os demais sendo membros técnicos.
+\section{Análise Técnica: Performance vs. Conveniência}
+% SUGESTÃO DE CONTEÚDO: 
+% - Discuta a dicotomia entre o ganho de desempenho e a facilidade de uso.
+% - Contraste o HTTPS (REST) com o gRPC com base nos resultados obtidos.
 
-Por fim, no que tange à ferramenta, os bons resultados de adoção demonstram que a estratégia adotada sanou uma dor real dos pesquisadores. Como próximos passos para trabalhos futuros, sugere-se a expansão dos conjuntos de dados integrados pela plataforma (novos ativos financeiros e granularidades temporais), o fornecimento de novos recursos, e o refinamento contínuo das políticas de controle de acesso.
+Como visto, o uso do protocolo gRPC enquanto interface de API externa voltada a clientes finais (pesquisadores) não trouxe os benefícios práticos esperados em requisições cotidianas de baixo volume. O pequeno volume de dados e o \textit{overhead} de desenvolvimento (construção do código inicial) não compensam, em termos absolutos, a baixíssima curva de aprendizado e a conveniência do protocolo HTTPS. 
 
-Quanto à organização LTI (ou LTI Finanças), visualiza-se a necessidade de melhoria nos processos formais, de melhoramento do processo de \textit{onboarding}, e de um melhor gerenciamento de forma geral, assegurando uma Orientação a Resultados (OR) superior. Quanto a isso, concluímos que a organização carece da definição de processos formais em um documento compartilhado. Assim, estamos atualmente com o nível de maturidade Parcialmente Gerenciado (PM), e devemos estabelecer processos, documentando-os, com o objetivo de chegar ao nível "Gerenciado" (G).
+No entanto, em cenários de alta demanda e tráfego massivo, a latência média do gRPC reduziu-se à metade em comparação ao HTTPS, comprovando reais ganhos de \textit{throughput}. Fica claro que existe um forte \textit{trade-off} entre a conveniência para prototipação (HTTPS) e o alto desempenho de rede (gRPC).
 
-Nesse sentido, haja vista os grandes ganhos de eficiência na construção de código proporcionados pelos Modelos de Linguagem Grande (LLMs), surge a oportunidade de evoluir a API qData, proporcionando recursos que possam a atender novas iniciativas, como as necessidades do emergente projeto "Núcleo de Investimentos e Especulação Financeira" (NIEF).
+\section{Impactos Organizacionais no LTI Finanças}
+% SUGESTÃO DE CONTEÚDO: 
+% - Reflita sobre como esse projeto de software influenciou a maturidade da equipe.
+% - Comente sobre governança, liderança e os processos do grupo.
+
+Em relação ao impacto estrutural, as atividades formais de engenharia de software introduzidas evidenciaram à liderança que novas estruturas de gerenciamento são estritamente necessárias para a maturidade do laboratório. Verificou-se que uma estrutura hierárquica simples (um tech lead, um gestor e demais membros técnicos) funcionou melhor que tentativas de organogramas excessivamente robustos e complexos.
+
+Visualiza-se a forte necessidade de refinar os processos formais de \textit{onboarding} e documentação. Atualmente, a organização encontra-se em um nível de maturidade Parcialmente Gerenciado (PM), sendo fundamental o estabelecimento de processos bem documentados para alcançar um nível "Gerenciado" (G), garantindo uma maior Orientação a Resultados (OR).
+
+\section{Trabalhos Futuros}
+% SUGESTÃO DE CONTEÚDO: 
+% - Enumere os próximos passos técnicos e organizacionais que não couberam no escopo atual.
+% - Sugira novas aplicações tecnológicas ou expansões.
+
+Como trabalhos futuros, propõem-se as seguintes iniciativas:
+\begin{itemize}
+    \item \textbf{Uso Estratégico do gRPC:} Recomenda-se aplicar o gRPC exclusivamente na comunicação interna de altíssimo rendimento entre microsserviços (como entre \textit{backends} e bancos de dados, sem exposição à Internet), evitando seu uso na prototipação de experimentos em Python ou para alimentar \textit{dashboards} web.
+    \item \textbf{Expansão de Dados e Recursos:} Ampliar os conjuntos de dados (novos ativos financeiros e granularidades intradiárias/micro-segundos) e aprimorar continuamente o controle granular de acesso (Supabase).
+    \item \textbf{Evolução com Inteligência Artificial:} Aproveitar o ganho de produtividade gerado pelos Modelos de Linguagem Grande (LLMs) para acelerar a expansão da API qData, atendendo a novas iniciativas como o emergente "Núcleo de Investimentos e Especulação Financeira" (NIEF).
+\end{itemize}
