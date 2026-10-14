@@ -140,6 +140,30 @@ A principal ameaça à validade externa reside no escopo amostral e no contexto 
 
 Para favorecer a transferibilidade da solução para outros grupos de pesquisa ou instituições congêneres, a plataforma adotou padrões abertos de comunicação (gRPC e HTTPS RESTful), conteinerização completa dos serviços via Docker e autenticação desacoplada baseada em JSON Web Tokens (JWT). Uma eventual replicação do ecossistema requer apenas a inicialização de novas instâncias autônomas, usando o comando \texttt{docker compose up -d}, com configuração independente de credenciais e provedores de mercado.
 
+% REVISÃO NECESSÁRIA
+\section{Conformidade legal e considerações éticas}
+\label{sec:conformidade}
+
+O desenvolvimento da ferramenta qDist impõe, adicionalmente, a observância de normativos externos ao domínio estritamente técnico, notadamente as políticas de distribuição de dados da B3 (Brasil, Bolsa, Balcão) e a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018). Esta seção descreve essas questões e as medidas de mitigação recomendadas.
+
+% REVISÃO NECESSÁRIA
+\subsection{Políticas de dados de mercado da B3}
+
+A B3, na qualidade de administradora dos mercados de bolsa e de balcão organizado, regula por meio de sua Política de Consumo e de sua Política Comercial de \textit{Market Data} as condições sob as quais os dados de suas plataformas de negociação podem ser distribuídos, redistribuídos ou disponibilizados a terceiros, exigindo, em regra, a formalização de Termo de Adesão ou de contrato próprio para tais finalidades.
+
+Ainda que a ferramenta qDist opere em caráter estritamente interno e não comercial, reconhece-se que a arquitetura de distribuição aos pesquisadores do LTI pode se aproximar do conceito de redistribuição de dados de mercado tal como definido pela B3. Como medida de mitigação, este trabalho recomenda que o LTI e a UFC busquem esclarecimento formal junto à B3 e/ou às corretoras parceiras (XP, Rico e Inter) quanto ao enquadramento do uso acadêmico da ferramenta, avaliando inclusive a hipótese de isenção ou de tratamento diferenciado previsto para fins educacionais e de pesquisa.
+
+% REVISÃO NECESSÁRIA
+\subsection{Proteção de dados pessoais (LGPD)}
+
+No que tange aos dados pessoais dos usuários da plataforma (pesquisadores cadastrados via Supabase e JWT), o sistema deve observar os princípios de finalidade, adequação e necessidade estabelecidos pela LGPD. Para isso, a coleta de dados pessoais é restrita ao mínimo necessário para autenticação e controle de acesso, vedando-se qualquer uso secundário dessas informações.
+
+% REVISÃO NECESSÁRIA
+\subsection{Escopo regulatório e atuação da CVM}
+
+Por fim, reitera-se que a ferramenta qDist não realiza execução de ordens, recomendação de investimentos ou qualquer outra atividade sujeita à regulação da Comissão de Valores Mobiliários (CVM), mantendo-se estritamente no domínio de infraestrutura de dados para fins de pesquisa acadêmica.
+
+% REVISÃO NECESSÁRIA
 \section{Síntese}
 
 Em síntese, a metodologia combina fundamentação teórica, desenvolvimento incremental e validação experimental para construir uma solução centralizada de dados financeiros voltada ao LTI. O foco do trabalho está em demonstrar que é possível oferecer acesso compartilhado a dados históricos e em tempo real com baixa latência, mantendo consistência, disponibilidade e reduzindo o esforço individual de integração por parte dos pesquisadores. Por fim, a metodologia visa aplicar os conhecimentos da grade curricular do Bacharelado em Engenharia de Software oferecido pelo Campus de Russas da Universidade Federal do Ceará, uma oportunidade de aplicação de técnicas de engenharia topo de linha. Definitivamente, esta metodologia é uma tentativa de orientar a construção de uma solução robusta e "headless" para provimento de dados e viabilização de experimentos.
