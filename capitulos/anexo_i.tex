@@ -1,0 +1,60 @@
+\begin{anexosenv}
+\partanexos
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+\chapter{Corpo do e-mail de consulta à XP Investimentos e à MetaQuotes}
+\label{anexo:email}
+
+Este anexo apresenta o corpo do e-mail planejado para esclarecer, junto à corretora XP Investimentos e à fornecedora do MetaTrader 5 (MetaQuotes), o enquadramento do uso e da distribuição acadêmica dos dados de mercado, conforme discutido na Seção~\ref{sec:conformidade}.
+
+\vspace{1em}
+\noindent\textbf{Assunto:} Consulta sobre uso e distribuição acadêmica de dados de mercado (Mini-Índice Ibovespa) -- Projeto qData / UFC
+
+\vspace{1em}
+\noindent Prezados(as),
+
+Meu nome é Luis Maia, sou estudante do Bacharelado em Engenharia de Software da Universidade Federal do Ceará (UFC), Campus de Russas, e integrante do Laboratório de Tecnologias Inovadoras (LTI). Escrevo para pedir esclarecimentos sobre o enquadramento do uso dos dados de mercado fornecidos por vocês no projeto descrito a seguir.
+
+\noindent\textbf{Contexto do projeto}
+
+No LTI, desenvolvo, como Trabalho de Conclusão de Curso, a plataforma qData. Ela centraliza dados financeiros históricos e em tempo real (\textit{market data}) para uso exclusivo de pesquisadores e estudantes do laboratório, em pesquisas de finanças quantitativas. O ativo estudado é o contrato futuro de Mini-Índice Ibovespa.
+
+O fluxo atual é este:
+\begin{enumerate}
+    \item os dados são obtidos por meio do MetaTrader 5, conectado à conta em corretora [XP Investimentos];
+    \item a plataforma armazena os dados em banco de dados de séries temporais;
+    \item a plataforma os disponibiliza, via API autenticada (HTTPS e gRPC), aos pesquisadores cadastrados do LTI.
+\end{enumerate}
+
+Características do uso:
+\begin{itemize}
+    \item é estritamente interno, acadêmico e não comercial;
+    \item não há venda, sublicenciamento nem exposição pública dos dados;
+    \item o acesso é restrito a usuários cadastrados e autenticados;
+    \item a plataforma não executa ordens nem faz recomendação de investimentos, sendo apenas infraestrutura de dados para pesquisa.
+\end{itemize}
+
+\noindent\textbf{Dúvida}
+
+Sabemos que a B3 regula a distribuição e a redistribuição de \textit{market data} por meio de suas Políticas de Consumo e Comercial, que em regra exigem Termo de Adesão ou contrato próprio. Como os dados passam a ser consultados por mais de um pesquisador por meio da plataforma, gostaríamos de entender se isso pode ser considerado redistribuição. Pedimos, por isso, o esclarecimento formal dos seguintes pontos:
+\begin{enumerate}
+    \item O uso descrito é permitido pelos termos de uso da conta e do fornecimento de dados? Se não for, quais condições ou contratos seriam necessários? (Na mensagem à MetaQuotes: o uso do terminal MetaTrader 5 para extração programática de cotações, com posterior armazenamento e compartilhamento interno, é permitido pela licença?)
+    \item Esse compartilhamento interno com pesquisadores configura redistribuição de dados de mercado nos termos da B3?
+    \item Existe isenção, licença ou tratamento diferenciado para fins educacionais e de pesquisa acadêmica?
+    \item Há limitações quanto ao armazenamento histórico dos dados, à sua granularidade e ao número de usuários com acesso?
+    \item Caso seja necessário formalizar o uso, qual é o procedimento e quem é o contato responsável?
+\end{enumerate}
+
+Podemos enviar documentação adicional sobre a arquitetura do sistema ou participar de uma reunião, se isso ajudar. Um parecer por escrito seria muito valioso, pois será citado no trabalho acadêmico e orientará a adequação da plataforma.
+
+Agradeço desde já a atenção e fico à disposição.
+
+\vspace{1em}
+\noindent Atenciosamente,
+
+\noindent Luis Maia\\
+Estudante de Engenharia de Software -- UFC Campus Russas\\
+Laboratório de Tecnologias Inovadoras (LTI)\\
+{[e-mail]} | {[telefone]}
+
+\end{anexosenv}
