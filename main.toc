@@ -42,7 +42,9 @@
 \contentsline {section}{\numberline {3.7}Métricas de avaliação}{44}{section.3.7}%
 \contentsline {section}{\numberline {3.8}Procedimento experimental}{44}{section.3.8}%
 \contentsline {section}{\numberline {3.9}Ameaças à validade}{45}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Síntese}{45}{section.3.10}%
+\contentsline {subsection}{\numberline {3.9.1}Validade Interna}{45}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.9.2}Validade Externa e Generalização}{45}{subsection.3.9.2}%
+\contentsline {section}{\numberline {3.10}Síntese}{46}{section.3.10}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{CRONOGRAMA}}{47}{chapter.4}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
@@ -57,4 +59,8 @@
 \contentsline {subsection}{\numberline {5.2.3}Experiência adquirida}{52}{subsection.5.2.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONCLUSÕES E TRABALHOS FUTUROS}}{53}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Considerações Finais e Cumprimento dos Objetivos}{53}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Análise Técnica: Performance vs. Conveniência}{53}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Impactos Organizacionais no LTI Finanças}{53}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Trabalhos Futuros}{54}{section.6.4}%
 \vspace {\cftbeforechapterskip }
