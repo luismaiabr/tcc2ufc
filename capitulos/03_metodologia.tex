@@ -140,28 +140,49 @@ A principal ameaça à validade externa reside no escopo amostral e no contexto 
 
 Para favorecer a transferibilidade da solução para outros grupos de pesquisa ou instituições congêneres, a plataforma adotou padrões abertos de comunicação (gRPC e HTTPS RESTful), conteinerização completa dos serviços via Docker e autenticação desacoplada baseada em JSON Web Tokens (JWT). Uma eventual replicação do ecossistema requer apenas a inicialização de novas instâncias autônomas, usando o comando \texttt{docker compose up -d}, com configuração independente de credenciais e provedores de mercado.
 
-% REVISÃO NECESSÁRIA
-\section{Conformidade legal e considerações éticas}
+\section{Conformidade legal, \textit{compliance} e governança}
 \label{sec:conformidade}
 
-O desenvolvimento da ferramenta qData impõe, adicionalmente, a observância de normativos externos ao domínio estritamente técnico, notadamente as políticas de distribuição de dados da B3 (Brasil, Bolsa, Balcão) e a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018). Esta seção descreve essas questões e as medidas de mitigação recomendadas.
+O desenvolvimento e a eventual disponibilização da plataforma qData impõem a observância rigorosa de normativos externos ao domínio estritamente técnico, notadamente as políticas de distribuição de dados da B3 (Brasil, Bolsa, Balcão), os termos de uso de corretoras e plataformas parceiras, a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018) e a responsabilidade institucional da universidade. Esta seção descreve as diretrizes de conformidade adotadas no projeto, bem como o planejamento das medidas mitigatórias.
 
-% REVISÃO NECESSÁRIA
-\subsection{Políticas de dados de mercado da B3}
+\subsection{Formalização regulatória e consulta a entidades de mercado}
 
-A B3, na qualidade de administradora dos mercados de bolsa e de balcão organizado, regula por meio de sua Política de Consumo e de sua Política Comercial de \textit{Market Data} as condições sob as quais os dados de suas plataformas de negociação podem ser distribuídos, redistribuídos ou disponibilizados a terceiros, exigindo, em regra, a formalização de Termo de Adesão ou de contrato próprio para tais finalidades.
+A B3 regula, por meio de sua Política de Consumo e Política Comercial de \textit{Market Data}, os critérios sob os quais cotações e negócios de suas plataformas de negociação podem ser consumidos ou disponibilizados a terceiros. Como o qData provê acesso estruturado a dados financeiros no âmbito laboratorial, identificou-se a necessidade de assegurar que tal fluxo não seja enquadrado como redistribuição não autorizada.
 
-Ainda que a ferramenta qData opere em caráter estritamente interno e não comercial, reconhece-se que a arquitetura de distribuição aos pesquisadores do LTI pode se aproximar do conceito de redistribuição de dados de mercado tal como definido pela B3. Como medida de mitigação, este trabalho recomenda que o LTI e a UFC busquem esclarecimento formal junto à B3 e/ou às corretoras parceiras (XP, Rico e Inter) quanto ao enquadramento do uso acadêmico da ferramenta, avaliando inclusive a hipótese de isenção ou de tratamento diferenciado previsto para fins educacionais e de pesquisa. Para viabilizar esse esclarecimento, foi planejado o envio de e-mail à corretora XP Investimentos e à MetaQuotes (fornecedora do MetaTrader 5), cujo corpo, descrevendo o contexto do projeto, o fluxo de dados e as dúvidas a serem esclarecidas, encontra-se no Anexo~\ref{anexo:email}.
+Diante disso, formalizou-se o envio de consulta aos setores competentes da corretora parceira (XP Investimentos), da fornecedora da tecnologia de captura (MetaQuotes) e dos canais de negociação da B3. O corpo do documento protocolado encontra-se reproduzido integralmente no Anexo~\ref{anexo:email}, contemplando o esclarecimento sobre:
+\begin{enumerate}
+    \item A possibilidade de enquadramento da solução sob as hipóteses de isenção ou regime especial para uso exclusivamente acadêmico, científico e não comercial;
+    \item A regularidade da extração programática e custódia local de cotações perante as licenças de uso das ferramentas;
+    \item A eventual necessidade de celebração de Termo de Adesão e Licenciamento institucional formal.
+\end{enumerate}
+Como diretriz de governança, o projeto estabelece que a ampliação do escopo operacional da ferramenta e a admissão de novos usuários permanecem expressamente condicionadas aos direcionamentos oficiais emitidos pelas referidas entidades.
 
-% REVISÃO NECESSÁRIA
+\subsection{Planejamento de restrição de dados com atraso (\textit{delayed market data})}
+
+No âmbito das práticas globais de mercado e das diretrizes da B3, há uma distinção regulatória fundamental entre dados em tempo real (\textit{real-time}) e dados com atraso regulamentar (\textit{delayed data}, tipicamente com defasagem mínima de 15 minutos). Enquanto os fluxos em tempo real concentram elevado rigor contratual e custos de licenciamento com foco em execução operacional, os dados com atraso contam com exigências regulatórias substancialmente simplificadas ou gratuitas para fins de estudo e demonstração.
+
+Para a maioria das pesquisas quantitativas desenvolvidas no ambiente universitário --- tais como simulações retrospectivas (\textit{backtesting}), calibração de modelos econométricos e treinamento de algoritmos de aprendizado de máquina --- a exigência de dados estritamente em tempo real inexiste.
+
+Ressalta-se que, no escopo restrito de desenvolvimento deste Trabalho de Conclusão de Curso, a barreira de atraso não foi codificada no protótipo experimental, uma vez que o objetivo primário da pesquisa concentrou-se na aferição de desempenho, vazão e latência mínima da infraestrutura sob regime de alta frequência. Contudo, como requisito não funcional de governança e segurança jurídica, planejou-se formalmente no \textit{backlog} arquitetural da plataforma a introdução de um módulo de defasagem temporal controlada (mínimo de 15 minutos) antes de qualquer eventual disponibilização externa da API aos demais integrantes do corpo acadêmico.
+
+\subsection{Consulta à Procuradoria Federal da UFC e titularidade institucional}
+
+Com o intuito de mitigar riscos de responsabilidade civil e assegurar que as obrigações contratuais não recaiam sobre os pesquisadores a título individual, planejou-se um conjunto de ações articuladas junto à administração central da universidade:
+\begin{itemize}
+    \item \textbf{Titularidade Laboratorial (\textit{Same-Account}):} Planeja-se conduzir os trâmites administrativos para que as credenciais e conexões junto à corretora e aos sistemas de captura sejam formalizadas sob a titularidade institucional do Laboratório de Tecnologias Inovadoras (LTI) ou da própria Universidade Federal do Ceará (UFC), garantindo que a ingestão opere estritamente em regime de conta única (\textit{same-account}) institucional;
+    \item \textbf{Abertura de Processo junto à Procuradoria Federal/NAJ:} Planeja-se a submissão de processo administrativo via Sistema Eletrônico de Informações (SEI/UFC) endereçado à Procuradoria Federal junto à UFC (ou ao Núcleo de Apoio Jurídico). O objetivo é obter parecer formal quanto à conformidade dos termos de licenciamento de dados e minutas de convênio à luz do Marco Legal de Ciência, Tecnologia e Inovação (Lei nº 10.973/2004), delimitando os contornos de responsabilidade civil da instituição e dos pesquisadores envolvidos.
+\end{itemize}
+
 \subsection{Proteção de dados pessoais (LGPD)}
 
-No que tange aos dados pessoais dos usuários da plataforma (pesquisadores cadastrados via Supabase e JWT), o sistema deve observar os princípios de finalidade, adequação e necessidade estabelecidos pela LGPD. Para isso, a coleta de dados pessoais, atualmente armazenada no Supabase, é restrita ao mínimo necessário para autenticação e controle de acesso, vedando-se qualquer uso secundário dessas informações.
+No que concerne ao tratamento de dados pessoais dos usuários da plataforma (pesquisadores cadastrados via Supabase e autenticados por JWT), o sistema observa as diretrizes da Lei Geral de Proteção de Dados (Lei nº 13.709/2018). O tratamento fundamenta-se nas bases legais do consentimento expresso (Art.~7º, I) e da realização de estudos por órgão de pesquisa (Art.~7º, IV). 
 
-% REVISÃO NECESSÁRIA
+A coleta é estritamente minimizada aos campos estritamente necessários para autenticação e auditoria perimetral de segurança (identificador, correio eletrônico institucional e registros de acesso criptografados), vedando-se qualquer destinação comercial ou secundária desses registros.
+
 \subsection{Escopo regulatório e atuação da CVM}
 
 Por fim, reitera-se que a ferramenta qData não realiza execução de ordens, recomendação de investimentos ou qualquer outra atividade sujeita à regulação da Comissão de Valores Mobiliários (CVM), mantendo-se estritamente no domínio de infraestrutura de dados para fins de pesquisa acadêmica.
+
 
 % REVISÃO NECESSÁRIA
 \section{Síntese}

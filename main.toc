@@ -44,39 +44,41 @@
 \contentsline {section}{\numberline {3.9}Ameaças à validade}{45}{section.3.9}%
 \contentsline {subsection}{\numberline {3.9.1}Validade Interna}{45}{subsection.3.9.1}%
 \contentsline {subsection}{\numberline {3.9.2}Validade Externa e Generalização}{45}{subsection.3.9.2}%
-\contentsline {section}{\numberline {3.10}Conformidade legal e considerações éticas}{46}{section.3.10}%
-\contentsline {subsection}{\numberline {3.10.1}Políticas de dados de mercado da B3}{46}{subsection.3.10.1}%
-\contentsline {subsection}{\numberline {3.10.2}Proteção de dados pessoais (LGPD)}{47}{subsection.3.10.2}%
-\contentsline {subsection}{\numberline {3.10.3}Escopo regulatório e atuação da CVM}{47}{subsection.3.10.3}%
-\contentsline {section}{\numberline {3.11}Síntese}{47}{section.3.11}%
+\contentsline {section}{\numberline {3.10}Conformidade legal, \textit {compliance} e governança}{46}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Formalização regulatória e consulta a entidades de mercado}{46}{subsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.10.2}Planejamento de restrição de dados com atraso (\textit {delayed market data})}{47}{subsection.3.10.2}%
+\contentsline {subsection}{\numberline {3.10.3}Consulta à Procuradoria Federal da UFC e titularidade institucional}{48}{subsection.3.10.3}%
+\contentsline {subsection}{\numberline {3.10.4}Proteção de dados pessoais (LGPD)}{48}{subsection.3.10.4}%
+\contentsline {subsection}{\numberline {3.10.5}Escopo regulatório e atuação da CVM}{48}{subsection.3.10.5}%
+\contentsline {section}{\numberline {3.11}Síntese}{49}{section.3.11}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{CRONOGRAMA}}{49}{chapter.4}%
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{CRONOGRAMA}}{51}{chapter.4}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{RESULTADOS}}{51}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Análise quantitativa de \textit {performance} de comunicação}{51}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Cenário 1 — Baixo Volume}{51}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Cenário 2 — Volume Intermediário (Aleatório A)}{51}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Cenário 3a — Alto Volume (Janela de 2 meses)}{52}{subsection.5.1.3}%
-\contentsline {section}{\numberline {5.2}Avaliação Qualitativa dos Protocolos de Comunicação}{53}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Adoção pelos Usuários e Impacto Prático}{53}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Impactos Organizacionais e na Infraestrutura}{53}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Experiência adquirida}{54}{subsection.5.2.3}%
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{RESULTADOS}}{53}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Análise quantitativa de \textit {performance} de comunicação}{53}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Cenário 1 — Baixo Volume}{53}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Cenário 2 — Volume Intermediário (Aleatório A)}{53}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Cenário 3a — Alto Volume (Janela de 2 meses)}{54}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}Avaliação Qualitativa dos Protocolos de Comunicação}{55}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Adoção pelos Usuários e Impacto Prático}{55}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Impactos Organizacionais e na Infraestrutura}{55}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Experiência adquirida}{56}{subsection.5.2.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONCLUSÕES E TRABALHOS FUTUROS}}{55}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Considerações Finais e Cumprimento dos Objetivos}{55}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Análise Técnica: Performance vs. Conveniência}{55}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Impactos Organizacionais no LTI Finanças}{55}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Trabalhos Futuros}{56}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Pilar Regulatório e de \textit {Compliance} (B3)}{56}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Pilar de Arquitetura e Segurança de Rede}{57}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Plano de Ação e Marcos para Trabalhos Futuros}{57}{subsection.6.4.3}%
+\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONCLUSÕES E TRABALHOS FUTUROS}}{57}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Considerações Finais e Cumprimento dos Objetivos}{57}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Análise Técnica: Performance vs. Conveniência}{57}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Impactos Organizacionais no LTI Finanças}{57}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Trabalhos Futuros}{58}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Pilar Regulatório e de \textit {Compliance} (B3)}{58}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Pilar de Arquitetura e Segurança de Rede}{59}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Plano de Ação e Marcos para Trabalhos Futuros}{59}{subsection.6.4.3}%
 \vspace {\cftbeforechapterskip }
 \cftinsert {AAA}
 \renewcommand *{\cftappendixname }{ANEXO \space }
 \setlength {\cftpartindent }{\cftlastnumwidth } \setlength {\cftpartnumwidth }{2em}
 \cftinsert {A}
-\contentsline {part}{\uppercase {Anexos}}{59}{section*.14}%
+\contentsline {part}{\uppercase {Anexos}}{61}{section*.14}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}
-\contentsline {appendix}{\chapternumberline {I}\MakeTextUppercase []{Corpo do e-mail de consulta à XP Investimentos e à MetaQuotes}}{61}{appendix.anexochapback.1}%
+\contentsline {appendix}{\chapternumberline {I}\MakeTextUppercase []{Corpo do e-mail de consulta à XP Investimentos e à MetaQuotes}}{63}{appendix.anexochapback.1}%
