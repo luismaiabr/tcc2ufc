@@ -39,12 +39,12 @@ Como trabalhos futuros, propõem-se as seguintes iniciativas:
 \begin{itemize}
     \item \textbf{Uso Estratégico do gRPC:} Recomenda-se aplicar o gRPC exclusivamente na comunicação interna de altíssimo rendimento entre microsserviços (como entre \textit{backends} e bancos de dados, sem exposição à Internet), evitando seu uso na prototipação de experimentos em Python ou para alimentar \textit{dashboards} web.
     \item \textbf{Expansão de Dados e Recursos:} Ampliar os conjuntos de dados (novos ativos financeiros e granularidades intradiárias/micro-segundos) e aprimorar continuamente o controle granular de acesso (Supabase).
-    \item \textbf{Evolução com Inteligência Artificial:} Aproveitar serviços associados ao qData para construir servidores de Model Context Protocl, viabilizando que Modelos de Linguagem Grande (LLMs) possam interagir e usar diretamente nossas ferramentas.
+    \item \textbf{Evolução com Inteligência Artificial:} Aproveitar serviços associados ao qData para construir servidores de Model Context Protocl, viabilizando que Modelos de Linguagem Grande (LLMs) possam interagir e usar diretamente as ferramentas desenvolvidas.
     \item \textbf{Formalização junto à B3 e Segurança de Acesso:} Buscar esclarecimento formal do LTI junto à Procuradoria Federal/NAJ da UFC, B3, e MetaQuotes, assim como  corretoras parceiras, quanto ao enquadramento do uso acadêmico dos dados de mercado distribuídos pela plataforma (ver Seção~\ref{sec:conformidade}).
 \end{itemize}
 
 % #REVISÃO NECESSÁRIA: Incorporação do planejamento formal de conformidade regulatória com a B3 e mitigação perimetral de rede via VPN (Tailscale) atendendo ao feedback de banca.
-Com respeito a isso, propomos o seguinte planejamento:
+Nesse sentido, propõe-se o seguinte planejamento:
 
 \subsection{Pilar Regulatório e de \textit{Compliance} (B3)}
 % #REVISÃO NECESSÁRIA: Registro do contato formal instaurado via negociacao@b3.com.br e condicionamento da expansão do qData ao parecer oficial.
@@ -56,7 +56,7 @@ Nesse sentido, já foi instaurada interlocução formal por meio do envio de con
 % #REVISÃO NECESSÁRIA: Planejamento de confinamento do acesso perimetral com descontinuação de portas públicas e adoção de mesh VPN (Tailscale/WireGuard).
 Em paralelo à validação regulatória, adota-se uma postura preventiva de mitigação de riscos de segurança da informação e governança de dados. Em arquiteturas expostas diretamente à rede mundial de computadores (\textit{Internet}), controles de autenticação feitos no software (aplicação) mantêm uma superfície de ataque sujeita a vulnerabilidades residuais não mapeadas, tentativas de força bruta e potenciais vazamentos de dados de mercado.
 
-Dessa forma, planejamos realizar o confinamento do acesso perimetral, prevendo a descontinuação de quaisquer \textit{endpoints} ou portas da API abertas à \textit{Internet} pública. A camada de transporte e comunicação entre os módulos coletores, o processador e as aplicações consumidoras está planejada para operar sob uma topologia de rede privada virtual em malha (\textit{mesh VPN}), operacionalizada via \textbf{Tailscale} (baseada no protocolo \textit{WireGuard}). Com essa abordagem planejada:
+Dessa forma, planeja-se realizar o confinamento do acesso perimetral, prevendo a descontinuação de quaisquer \textit{endpoints} ou portas da API abertas à \textit{Internet} pública. A camada de transporte e comunicação entre os módulos coletores, o processador e as aplicações consumidoras está planejada para operar sob uma topologia de rede privada virtual em malha (\textit{mesh VPN}), operacionalizada via \textbf{Tailscale} (baseada no protocolo \textit{WireGuard}). Com essa abordagem planejada:
 \begin{itemize}
     \item O tráfego passará a circular ponta a ponta com criptografia moderna de chave assimétrica;
     \item A comunicação será restrita exclusivamente aos nós computacionais pertencentes à \textit{tailnet} restrita de pesquisa, devidamente auditados e autenticados via controle de acesso baseado em identidade (\textit{Zero Trust});
@@ -65,7 +65,7 @@ Dessa forma, planejamos realizar o confinamento do acesso perimetral, prevendo a
 
 \subsection{Plano de Ação e Marcos para Trabalhos Futuros}
 % #REVISÃO NECESSÁRIA: Adição ao backlog dos marcos futuros de homologação regulatória e confinamento de rede ainda não implementados.
-Como direcionamento para os trabalhos futuros, propomos um planejamento ou adição ao \textit{backlog} dos seguintes itens, ainda não implementados ou executados, estruturados em marcos de projeto:
+Como direcionamento para os trabalhos futuros, propõe-se o planejamento ou adição ao \textit{backlog} dos seguintes itens, ainda não implementados ou executados, estruturados em marcos de projeto:
 
 \begin{enumerate}
     \item \textbf{Marco 1 — Acompanhamento e Homologação Regulatória (Adição ao \textit{Backlog}):}

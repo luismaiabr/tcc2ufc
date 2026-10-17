@@ -1,30 +1,40 @@
 \chapter{CRONOGRAMA}
 
-O desenvolvimento deste Trabalho de Conclusão de Curso foi estruturado e executado ao longo do primeiro semestre de 2026. As atividades iniciaram-se de maneira concomitante ao início do semestre letivo e da disciplina de Projeto de Pesquisa Científica e Tecnológica. A Tabela \ref{tab:cronograma} consolida os principais marcos temporais e as fases de evolução do projeto arquitetural do qDATA, desde o delineamento inicial até a sua entrega e finalização no dia atual.
+% #REVISÃO NECESSÁRIA: Ajuste do período do cronograma para 02/02/2026 a 11/12/2026 com base no escopo e versão atual do documento.
+O desenvolvimento deste Trabalho de Conclusão de Curso foi estruturado e executado ao longo do ano letivo de 2026, compreendendo os semestres 2026.1 e 2026.2. As atividades iniciaram-se em 02 de fevereiro de 2026, com o alinhamento de escopo e demandas analíticas do Laboratório de Tecnologias Inovadoras (LTI), estendendo-se até 11 de dezembro de 2026, com a consolidação dos resultados, adequação regulatória e entrega formal da monografia. A Tabela~\ref{tab:cronograma} consolida os principais marcos temporais e as fases de evolução do projeto arquitetural do qData.
 
 \begin{table}[htb]
 \centering
+\small
 \caption{Cronograma de execução das atividades do TCC}
 \label{tab:cronograma}
-\begin{tabular}{|p{3cm}|p{12cm}|}
+\begin{tabular}{|p{3.2cm}|p{11.8cm}|}
 \hline
 \textbf{Período} & \textbf{Atividade} \\
 \hline
-05 de Janeiro & Início do semestre letivo, da disciplina de Projeto de Pesquisa Científica e Tecnológica e definição do escopo macro do LTI FinHub. \\
+02 de Fevereiro & Início formal das atividades do TCC, definição do escopo macro do ecossistema qData e levantamento dos requisitos para séries temporais no LTI FinHub. \\
 \hline
-Janeiro & Revisão bibliográfica focada em arquitetura de microsserviços, bancos de dados de séries temporais e protocolos de comunicação. \\
+Fevereiro & Revisão bibliográfica sistemática sobre microsserviços, TimescaleDB, protocolos de comunicação (REST, gRPC, gRPC-Web), autenticação segura e maturidade MPS.Br. \\
 \hline
-Fevereiro & Preparação da infraestrutura com Docker, conteinerização de dependências. \\
+Março & Concepção da arquitetura em contêineres Docker, ambientação Linux/Wine e integração inicial com o pipeline de aquisição do MetaTrader 5 (\textit{mt5bridge}). \\
 \hline
-Março & Desenvolvimento da API assíncrona (REST) utilizando FastAPI e integração com o banco de dados TimescaleDB. \\
+Abril & Implementação da camada de persistência em PostgreSQL/TimescaleDB com suporte a hyper-tabelas e mecanismo de \textit{Upsert} para garantia de idempotência. \\
 \hline
-Abril & Implementação da arquitetura gRPC para streaming de dados bidirecional, e configuração de autenticação via JWT/Supabase. \\
+Maio & Desenvolvimento da API assíncrona FastAPI (REST), implementação do serviço gRPC com contratos Protocol Buffers (.proto) e controle de acesso via JWT/Supabase. \\
 \hline
-Maio & Testes de carga, validação da idempotência (\textit{Upsert}), e início da escrita dos capítulos textuais (Introdução e Fundamentação). \\
+Junho & Implementação de mecanismos de disponibilidade e testes: criação de testes unitários com \texttt{pytest} e configuração de rotinas de CI via GitHub Actions. \\
 \hline
-Junho & Finalização da redação da Metodologia, revisão dos textos produzidos e enquadramento nas normas da ABNT. \\
+Julho -- Agosto & Planejamento metodológico e execução dos ensaios experimentais de desempenho de rede (Cenários 1, 2, 3a e 3b) avaliando latência, \textit{throughput} e consumo de banda. \\
 \hline
-22 de Junho & Revisão final, encerramento do desenvolvimento e entrega formal do documento do TCC. \\
+Setembro & Análise quantitativa dos resultados comparativos entre protocolos e avaliação dos impactos organizacionais e de maturidade de processos na equipe do laboratório. \\
+\hline
+Outubro & Avaliação de conformidade legal (LGPD, B3 e CVM), envio de consulta formal à B3 (\texttt{negociacao@b3.com.br}) e planejamento do isolamento de rede via VPN (Tailscale). \\
+\hline
+Novembro & Redação integral e consolidação dos capítulos da monografia (Fundamentação, Metodologia, Resultados e Conclusão) e alinhamento com as normas ABNT. \\
+\hline
+Dezembro & Revisão final do documento com a orientação acadêmica, ajustes pós-revisão técnica e preparação da apresentação para a banca examinadora. \\
+\hline
+11 de Dezembro & Entrega formal da versão definitiva do Trabalho de Conclusão de Curso (TCC) e encerramento das atividades do projeto. \\
 \hline
 \end{tabular}
 \end{table}

@@ -15,7 +15,7 @@
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{FUNDAMENTAÇÃO TEÓRICA}}{29}{chapter.2}%
 \contentsline {section}{\numberline {2.1}O Ecossistema LTI FinHub}{29}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Arquitetura de Microsserviços}{30}{section.2.2}%
+\contentsline {section}{\numberline {2.2}Arquitetura de Microsserviços}{29}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Coleta de Dados com Tickers Especializados}{31}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Contêineres e Docker}{32}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Compatibilidade de Binários em Ambientes Linux (Wine)}{32}{subsection.2.4.1}%
@@ -67,13 +67,16 @@
 \contentsline {section}{\numberline {6.2}Análise Técnica: Performance vs. Conveniência}{55}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Impactos Organizacionais no LTI Finanças}{55}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Trabalhos Futuros}{56}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Pilar Regulatório e de \textit {Compliance} (B3)}{56}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Pilar de Arquitetura e Segurança de Rede}{57}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Plano de Ação e Marcos para Trabalhos Futuros}{57}{subsection.6.4.3}%
 \vspace {\cftbeforechapterskip }
 \cftinsert {AAA}
 \renewcommand *{\cftappendixname }{ANEXO \space }
 \setlength {\cftpartindent }{\cftlastnumwidth } \setlength {\cftpartnumwidth }{2em}
 \cftinsert {A}
-\contentsline {part}{\uppercase {Anexos}}{57}{section*.14}%
+\contentsline {part}{\uppercase {Anexos}}{59}{section*.14}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}
-\contentsline {appendix}{\chapternumberline {I}\MakeTextUppercase []{Corpo do e-mail de consulta à XP Investimentos e à MetaQuotes}}{59}{appendix.anexochapback.1}%
+\contentsline {appendix}{\chapternumberline {I}\MakeTextUppercase []{Corpo do e-mail de consulta à XP Investimentos e à MetaQuotes}}{61}{appendix.anexochapback.1}%

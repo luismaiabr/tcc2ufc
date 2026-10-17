@@ -8,7 +8,7 @@ O ponto de partida desta pesquisa é a necessidade de responder à questão prop
 
 Em vez de assumir um planejamento rígido e integral desde o início, como por exemplo um planejamento do tipo cascata, a proposta admite a incorporação gradual de requisitos e ajustes técnicos decorrentes das demandas advindas dos consumidores e das necessidades técnicas supervenientes. Tal dinamicidade exige, notavelmente, que haja um grau adequado de padronização de interfaces \textit{back-end} e camadas-\textit{controller} de dados no que diz respeito à API da plataforma.
 
-Para além de questões de integração, esse \textit{framework} é adequado porque muitos requisitos funcionais advêm de demandas de usuários reais do laboratório. Tais demandas, frequentemente, não são de conhecimento dos engenheiros. Em outras palavras, nós não temos pleno conhecimento do domínio-técnico ou domínio-funcional. Neste estudo, tal domínio consiste principalmente de estatística avançada, redes neurais e processos estocásticos. Assim, a metodologia visa um gerenciamento de projeto flexível o suficiente para acomodar diferentes necessidades, mas também suficientemente determinística para garantir a operabilidade contínua do ecossistema de serviços (\textit{feeder}, qDATA, \textit{dashboard}, etc).
+Para além de questões de integração, esse \textit{framework} é adequado porque muitos requisitos funcionais advêm de demandas de usuários reais do laboratório. Tais demandas, frequentemente, não são de conhecimento dos engenheiros. Em outras palavras, não se dispõe de pleno conhecimento do domínio técnico ou funcional. Neste estudo, tal domínio consiste principalmente de estatística avançada, redes neurais e processos estocásticos. Assim, a metodologia visa um gerenciamento de projeto flexível o suficiente para acomodar diferentes necessidades, mas também suficientemente determinística para garantir a operabilidade contínua do ecossistema de serviços (\textit{feeder}, qDATA, \textit{dashboard}, etc).
 
 \section{Questões de pesquisa}
 
@@ -26,7 +26,7 @@ Essas questões guiarão tanto o projeto quanto a implementação da avaliação
 
 \section{Fontes de conhecimento e delimitação do estudo}
 
-Não fazem parte do escopo a execução automática de ordens, a gestão de risco de estratégias de \textit{trading} e o desenvolvimento de ferramentas analíticas finais dos usuários. Nesse contexto, estamos criando uma solução de Market Data, isto é, provimento de dados de mercado em altíssima vazão em se tratando de baixar qualquer dado que já esteja no banco de dados – ainda que em quantidade grande (exemplo: 1Gb de dados) –. Por outro lado, está fora do escopo deste projeto prover dados extremamente atualizados (exemplo: dados que foram disponibilizados no \textit{broker} original há apenas 5 microssegundos atrás) com velocidade suficiente para execução de ordens de \textit{trading} (Order Routing). Convém reiterar: proveremos altíssima vazão, e dados suficientemente recentes para Market Data, mas não suficientemente recentes para Order Routing. Felizmente, a construção de um eventual microsserviço de Order Routing para esse ecossistema é uma tarefa extremamente elegante de um ponto de vista de engenharia de software, e extremamente veloz de um ponto de vista técnico, porém não iremos abordar isso neste trabalho.
+Não fazem parte do escopo a execução automática de ordens, a gestão de risco de estratégias de \textit{trading} e o desenvolvimento de ferramentas analíticas finais dos usuários. Nesse contexto, desenvolve-se uma solução de Market Data, isto é, provimento de dados de mercado em alta vazão para recuperação de dados persistidos no banco de dados – inclusive em volumes expressivos (por exemplo, 1 GB de dados) –. Por outro lado, está fora do escopo deste projeto prover dados com latência ultra-baixa (por exemplo, disponibilizados no \textit{broker} em escala de microssegundos) voltados para execução de ordens de \textit{trading} (Order Routing). Convém reiterar: provê-se alta vazão e dados suficientemente recentes para Market Data, mas não direcionados a Order Routing. A construção de um eventual microsserviço de Order Routing para esse ecossistema consiste em uma extensão viável sob a ótica de engenharia de software, contudo tal escopo não é abordado neste trabalho.
 
 \section{Desenvolvimento incremental da solução}
 
@@ -39,7 +39,7 @@ A implementação foi conduzida de forma incremental, partindo de um esboço mac
 
 \subsection{Especificação do Contrato de Dados}
 
-Por fim, os requisitos de domínios impostos aos engenheiros nos levaram a armazenar a categoria de dados \textit{Open, High, Low, Close, Volume} (OHLCV) (\textit{Open, High, Low, Close, Volume}) para o ativo Mini-Índice Ibovespa, com granularidade de 1 minuto, e a frequência de atualização é de 1 minuto para os dados em tempo real. A escolha por essa categoria de dados se deve ao fato de que ela é amplamente utilizada em análises financeiras e estratégias de \textit{trading}. A estrutura de dados (.proto) foi definida conforme o Código-fonte \ref{lst:ohlcbar} apresentado a seguir:
+Por fim, os requisitos de domínio direcionaram o armazenamento da categoria de dados \textit{Open, High, Low, Close, Volume} (OHLCV) (\textit{Open, High, Low, Close, Volume}) para o ativo Mini-Índice Ibovespa, com granularidade de 1 minuto e frequência de atualização de 1 minuto para os dados em tempo real. A escolha por essa categoria de dados se deve ao fato de que ela é amplamente utilizada em análises financeiras e estratégias de \textit{trading}. A estrutura de dados (.proto) foi definida conforme o Código-fonte \ref{lst:ohlcbar} apresentado a seguir:
 
 \begin{lstlisting}[language=C, caption={Estrutura da mensagem OHLCBar em Protocol Buffers}, label={lst:ohlcbar}, frame=single, numbers=left]
 message OHLCBar {
@@ -64,7 +64,7 @@ message OHLCBar {
 }
 \end{lstlisting}
 
-A solução é implementada em módulos, de modo que cada parte possa ser testada isoladamente antes da integração completa. A arquitetura é orientada à separação de responsabilidades, para que a evolução de um componente não comprometa os demais, e nesse sentido faz uso amplo de \textit{containers} Docker. Desta forma: conseguimos construir três microsserviços: o \textit{feeder}, responsável pela ingestão de dados; o qDATA, responsável pela persistência e consulta dos dados; e o \textit{dashboard}, que não é o foco deste trabalho, mas apenas porque não somos os donos desse produto (`\textit{product ownership}'), e sua existência é para nós uma fonte de demandas ou fonte de requisitos.
+A solução é implementada em módulos, de modo que cada parte possa ser testada isoladamente antes da integração completa. A arquitetura é orientada à separação de responsabilidades, para que a evolução de um componente não comprometa os demais, e nesse sentido faz uso amplo de \textit{containers} Docker. Desta forma, estruturam-se três microsserviços: o \textit{feeder}, responsável pela ingestão de dados; o qDATA, responsável pela persistência e consulta dos dados; e o \textit{dashboard}, que não constitui o foco principal deste trabalho por não pertencer ao seu escopo de propriedade de produto (`\textit{product ownership}'), atuando essencialmente como fonte de demandas e de requisitos.
 
 Uma regra de \textit{design} importante a ser integrada à arquitetura do presente ecossistema – o ecossistema em que o qData está inserido – é o princípio da independência de dados, descrito por Chris Richardson \cite{newman2015building}. Essa abordagem sugere que sistemas de banco de dados concentrados em um único nó com a finalidade de servir módulos cujos propósitos são distintos gerariam problemas de acoplamento complicados e, sobretudo, desnecessários. Ele discorre:
 
@@ -72,7 +72,7 @@ Uma regra de \textit{design} importante a ser integrada à arquitetura do presen
 Uma característica chave da arquitetura de microsserviços é que os serviços são fracamente acoplados e se comunicam apenas via APIs [...] Em tempo de desenvolvimento, os desenvolvedores podem alterar o esquema de um serviço sem precisarem coordenar com desenvolvedores que trabalham em outros serviços. Em tempo de execução, os serviços são isolados uns dos outros — por exemplo, um serviço nunca será bloqueado porque outro serviço detém um bloqueio no banco de dados.
 \end{citacao}
 
-Em termos práticos, isso implica, por exemplo, a utilização de um banco de dados no serviço qData (PostgreSQL) e um outro banco de dados próprio no serviço de cálculos (SQLite). Embora pudéssemos pensar em armazenar no qData dados numéricos provenientes de cálculos estatísticos – baseado na ideia de um ``centro de dados'' –, o princípio em discussão recomenda um banco de dados próprio para cada serviço, preferencialmente rodando em contêineres. Nesse sentido, podemos argumentar que um nó é uma API associada a um sistema de banco de dados independente.
+Em termos práticos, isso implica, por exemplo, a utilização de um banco de dados no serviço qData (PostgreSQL) e um outro banco de dados próprio no serviço de cálculos (SQLite). Embora seja possível conceber o armazenamento no qData de dados numéricos provenientes de cálculos estatísticos – com base na ideia de um ``centro de dados'' –, o princípio em discussão recomenda um banco de dados próprio para cada serviço, preferencialmente rodando em contêineres. Nesse sentido, argumenta-se que um nó é uma API associada a um sistema de banco de dados independente.
 
 \section{Governança}
 
@@ -102,7 +102,7 @@ Além disso, o \textit{blueprint} deste projeto propõe testes automatizados na 
 
 \section{Métricas de avaliação}
 
-No eixo de desempenho, mediremos latência média, variabilidade da latência, tempo de resposta, vazão e capacidade de atendimento simultâneo. No eixo de confiabilidade, analisaremos a disponibilidade dos serviços, a estabilidade da ingestão, além de que realizaremos testes de carga com o \textit{framework} Locust.
+No eixo de desempenho, medem-se latência média, variabilidade da latência, tempo de resposta, vazão e capacidade de atendimento simultâneo. No eixo de confiabilidade, analisam-se a disponibilidade dos serviços e a estabilidade da ingestão, além da realização de testes de carga com o \textit{framework} Locust.
 
 \section{Procedimento experimental}
 
