@@ -1,8 +1,22 @@
 \babel@toc {brazil}{}\relax 
 \babel@toc {brazilian}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Visão geral da arquitetura: Ingestão distribuída e distribuição segura de dados financeiros.}}{22}{figure.1.1}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Serviços e seus respectivos bancos de dados independentes.}}{23}{figure.1.2}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Escopo do projeto: núcleo de dados, coordenação com serviços-chave, ecossistema e interfaces, e gerenciamento do projeto.}}{22}{figure.1.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Visão geral da arquitetura: Ingestão distribuída e distribuição segura de dados financeiros.}}{23}{figure.1.2}%
 \contentsline {figure}{\numberline {3}{\ignorespaces Visão geral da autonomia dos pesquisadores.}}{24}{figure.1.3}%
 \contentsline {figure}{\numberline {4}{\ignorespaces Banco de usuários no Supabase.}}{25}{figure.1.4}%
 \contentsline {figure}{\numberline {5}{\ignorespaces Demandas do núcleo de dados.}}{26}{figure.1.5}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Ecossistema LTI FinHub}}{30}{figure.2.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Execução do MT5 \textit {headless} via Wine em contêiner Linux.}}{32}{figure.2.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces HTTP/1.1 (JSON) versus HTTP/2 com gRPC (Protobuf).}}{34}{figure.2.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Particionamento temporal em \textit {chunks} de uma \textit {hypertable}.}}{35}{figure.2.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Fluxo de ingestão com idempotência via \textit {Upsert}.}}{37}{figure.2.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Autenticação e verificação criptográfica \textit {stateless} com JWT e Supabase.}}{38}{figure.2.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Pipeline de integração contínua e \textit {deploy} automatizado no GitHub Actions.}}{39}{figure.2.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Fluxo metodológico ponta a ponta: da coleta externa ao consumo de séries temporais.}}{43}{figure.3.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Arquitetura do procedimento experimental e \textit {benchmarking}.}}{47}{figure.3.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Fronteira regulatória e governança de dados financeiros (B3 versus LTI).}}{51}{figure.3.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Linha do tempo das fases do projeto (\textit {roadmap} 2026).}}{54}{figure.4.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Comparativo de latência média entre protocolos (Cenários 1, 2 e 3a).}}{57}{figure.5.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Vazão de dados (\textit {throughput}) em barras por segundo.}}{57}{figure.5.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Topologia da infraestrutura em produção no laboratório (Traefik e Bitwarden).}}{59}{figure.5.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Topologia futura de segurança \textit {zero-trust} via malha VPN (Tailscale/WireGuard).}}{64}{figure.6.20}%

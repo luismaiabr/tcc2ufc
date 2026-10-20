@@ -8,13 +8,20 @@ Para solucionar essa questão, surgiu a necessidade de desenvolver uma plataform
 
 Diante disso, delineou-se um "ponto de partida" que consistia, inicialmente, em uma simples API de séries temporais, mas que evoluiu, a nível de produto, para um ecossistema de serviços de dados financeiros. A afirmação desta evolução para um "ecossistema" justifica-se pelo fato de que a solução proposta iniciou-se como (1) um projeto técnico restrito a um núcleo de obtenção e distribuição de dados (Nucleo de dados), expandiu-se para (2) um escopo de serviço de software completo que interage com clientes e outros serviços (coordenação com serviços-chave), coordenação técnico (Ecossistema e interfaces),e por fim os aspectos de (3) gestão do projeto enquanto ecossistema (Gerenciamento do projeto).
 
+\begin{figure}[!htb]
+    \centering
+    \caption{Escopo do projeto: núcleo de dados, coordenação com serviços-chave, ecossistema e interfaces, e gerenciamento do projeto.}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/figura_1_bancos_independentes.png}
+    \label{fig:bancos_independentes}
+\end{figure}
+
 
 Para concretizar essa visão, concebeu-se um núcleo de armazenamento e distribuição baseada em \textit{containers} Docker. O núcleo de aquisição de dados, implementado de forma independente pelo discente Evamberto Oliveira, executa o \textit{MetaTrader 5} integrado a provedores externos, como as corretoras Rico, XP e Inter. Esse serviço de aquisição, denominado \textit{mt5bridge}, envia os dados dos ativos para um canal de recebimento de dados do qData, que então os persiste no banco de dados. Toda a ingestão ocorre via Representational State Transfer (REST)/HTTPS, justificável pelo fluxo relativamente baixo de entrada de dados, o que evidencia a coordenação necessária entre o mt5BRIDGE e o qDATA.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Visão geral da arquitetura: Ingestão distribuída e distribuição segura de dados financeiros.}
-    \includegraphics[width=\textwidth]{assets/figura_2_visao_arquitetura.png}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/figura_2_visao_arquitetura.png}
     \label{fig:visao_arquitetura}
 \end{figure}
 
@@ -22,13 +29,6 @@ A persistência no qDATA é gerenciada por um banco de dados PostgreSQL com estr
 
 No que tange à distribuição técnica dos dados, o protocolo \textit{gRPC Remote Procedure Call} (gRPC) permite o estabelecimento de conexões contínuas (com sessão) e uma obtenção mais rápida, sendo útil em consultas massivas, como o resgate de dados correspondentes a um ano inteiro. Contudo, visando complementar e facilitar essa distribuição, implementou-se também uma interface HTTPS/2. Essa segunda opção foi projetada para que a conexão com a API pudesse ser realizada de forma mais ágil pelos usuários (pesquisadores e desenvolvedores), uma vez que o uso de HTTPS apresenta uma curva de aprendizado substancialmente menor e um \textit{overhead} de desenvolvimento reduzido.
 
-
-\begin{figure}[htb]
-    \centering
-    \caption{Serviços e seus respectivos bancos de dados independentes.}
-    \includegraphics[width=\textwidth]{assets/figura_1_bancos_independentes.png}
-    \label{fig:bancos_independentes}
-\end{figure}
 
 
 À medida que a ferramenta avançou em produção, membros do projeto passaram a utilizá-la como base para construir serviços quantitativos auxiliares, tais como cálculos de correlações com \textit{bootstrapping}, experimentos em Python de trabalhos teóricos conduzidos no projeto, e rotinas de identificação de anomalias. Esse cenário reforça o desenho de um ecossistema coeso de serviços e análises de apoio.
@@ -51,13 +51,14 @@ Deve-se observar, no entanto, que o uso em outros projetos requer, por questões
 
 O acesso à plataforma é protegido por autenticação baseada em \textit{JSON Web Token} (JWT) integrada ao Supabase, viabilizando um controle de acesso granular por perfil de usuário e por provedor de dados.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Banco de usuários no Supabase.}
-    \includegraphics[width=\textwidth]{assets/figura_6_banco_usuarios_sb.png}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/figura_6_banco_usuarios_sb.png}
     \label{fig:banco_usuarios_sb}
 \end{figure}
 
+\FloatBarrier
 \section{Escopo}
 
 A plataforma qDATA abrange a ingestão de dados de corretoras selecionadas, o armazenamento e a distribuição desses dados para consumidores internos do grupo de pesquisa LTI, com foco no projeto \textit{Análise de Séries Financeiras}. Dentro do escopo técnico estão a comunicação com um software de aquisição de barras \textit{Open, High, Low, Close} (OHLC), o armazenamento otimizado com hyper-tabelas através do TimeScale — o que viabiliza a entrega de dados em alta velocidade aos consumidores autorizados — e a disponibilização desses dados via HTTPS, visando cenários que exigem praticidade e agilidade no desenvolvimento de aplicações.
@@ -68,7 +69,7 @@ Ao longo deste trabalho, também são analisadas as políticas de acesso a dados
 \begin{figure}[H]
     \centering
     \caption{Demandas do núcleo de dados.}
-    \includegraphics[width=\textwidth]{assets/figura_4_demandas_nucleo.png}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/figura_4_demandas_nucleo.png}
     \label{fig:demandas_nucleo}
 \end{figure}
 

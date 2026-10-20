@@ -84,20 +84,21 @@ A análise empírica deste cenário demonstra de forma contundente a superiorida
   \end{tabular}
 \end{table}
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Comparativo de latência média entre protocolos (Cenários 1, 2 e 3a).}
-    \includegraphics[width=\textwidth]{assets/IMG-01.jpg}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-01.jpg}
     \label{fig:latencia_protocolos}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Vazão de dados (\textit{throughput}) em barras por segundo.}
-    \includegraphics[width=\textwidth]{assets/IMG-02.jpg}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-02.jpg}
     \label{fig:vazao_barras_segundo}
 \end{figure}
 
+\FloatBarrier
 \section{Avaliação Qualitativa dos Protocolos de Comunicação}
 
 Durante o desenvolvimento, observou-se que alguns aspectos da arquitetura e modelagem propostas se comportaram de forma diferente da esperada sob condições reais. Nesse sentido, a tentativa de utilização do protocolo gRPC para propiciar uma transferência de dados mais veloz mostrou-se inadequada para a API pública, uma vez que as séries temporais diárias solicitadas não ultrapassaram alguns kilobytes de tamanho.
@@ -121,10 +122,10 @@ No aspecto abstrato e organizacional, o presente projeto de software serviu como
     \item A criação de documentações de integração (\textit{onboarding}) e de descrição estruturada para novos membros do projeto.
 \end{itemize}
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Topologia da infraestrutura em produção no laboratório (Traefik e Bitwarden).}
-    \includegraphics[width=\textwidth]{assets/IMG-13.jpg}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-13.jpg}
     \label{fig:topologia_traefik_bitwarden}
 \end{figure}
 

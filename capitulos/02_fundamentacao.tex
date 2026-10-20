@@ -12,10 +12,10 @@ Neste trabalho, adota-se como ponto de partida inicial o componente qDATA, dedic
 
 Ademais, ressalta-se que o presente estudo consolida as bases infraestruturais. Um trabalho futuro (TCC2) dará ênfase a aspectos mais amplos, como governança de TI, aprofundamento na arquitetura de microsserviços e práticas de \textit{Product Ownership}, garantindo que a evolução do ecossistema FinHub ocorra de forma gerenciada, escalável e alinhada às necessidades estratégicas dos pesquisadores envolvidos.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Ecossistema LTI FinHub}
-    \includegraphics[width=\textwidth]{assets/figura_5_ecossistema_finhub.png}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/figura_5_ecossistema_finhub.png}
     \label{fig:ecossistema_finhub}
 \end{figure}
 
@@ -61,10 +61,10 @@ Ainda dentro do domínio da infraestrutura de contêineres, surge frequentemente
 
 Para contornar tal barreira no Linux, convenciona-se utilizar a camada de compatibilidade Wine (\textit{Wine Is Not an Emulator}). Trata-se de um software que traduz as chamadas de sistema (API) do Windows para equivalentes no padrão \textit{Portable Operating System Interface} (POSIX) do Linux em tempo real, evitando os atrasos de desempenho característicos de emuladores convencionais ou máquinas virtuais pesadas \cite{winehq2026}.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Execução do MT5 \textit{headless} via Wine em contêiner Linux.}
-    \includegraphics[width=\textwidth]{assets/IMG-07.jpg}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-07.jpg}
     \label{fig:mt5_wine_headless}
 \end{figure}
 
@@ -84,10 +84,10 @@ Em contrapartida, o gRPC (\textit{gRPC Remote Procedure Call}) é um \textit{fra
 
 Adota-se, portanto, uma arquitetura de rede híbrida alinhada com as melhores práticas da indústria financeira. A ingestão de barras (\textit{feeder} enviando ao núcleo) ocorre via \textit{endpoints} REST baseados no HTTP clássico, permitindo fácil inspeção, monitoramento com \textit{webhooks} e integração simplificada. Simultaneamente, a distribuição dos dados temporais para o painel (\textit{dashboard}) dos pesquisadores é trafegada via canais gRPC otimizados, superando obstáculos inerentes ao JSON e minimizando fortemente a latência nas consultas volumosas de cotações históricas. Esclarece-se que a melhoria feita ao usar Protocol Buffers (Protobuf) em vez de JSON consiste no fato de que esse tipo de serialização é mais compacto, além de ser mais rápido para serializar e desserializar em comparação ao formato de texto (JSON, \textit{Extensible Markup Language} (XML), etc). Nesse sentido, define-se serialização e desserialização como o processo de converter um objeto entre um formato utilizável pela memória do computador e um formato utilizável para transmissão ou armazenamento.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{HTTP/1.1 (JSON) versus HTTP/2 com gRPC (Protobuf).}
-    \includegraphics[width=\textwidth]{assets/IMG-05.jpg}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-05.jpg}
     \label{fig:http1_vs_grpc}
 \end{figure}
 
@@ -99,10 +99,10 @@ A extensão de Postgres denominada "TimescaleDB" se projeta essencialmente como 
 
 Desta forma, os pesquisadores do LTI podem submeter requisições envolvendo densas estatísticas com cálculos de médias e consolidação dos volumes intradiários em escalas cronológicas maiores (através das funções nativas como \texttt{time\_bucket}). O mecanismo subjacente somente inspeciona as frações de dados contidas nos intervalos requeridos (sem necessidade de percorrer todos os registros contidos em base de dados), e utiliza ainda algoritmos de compressão columnar sofisticados que propiciam economia substancial do espaço em disco sem sacrifício da presteza das consultas.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Particionamento temporal em \textit{chunks} de uma \textit{hypertable}.}
-    \includegraphics[width=\textwidth]{assets/IMG-06.jpg}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-06.jpg}
     \label{fig:hypertable_chunks}
 \end{figure}
 
@@ -122,10 +122,10 @@ O mecanismo de \textit{Upsert} constitui o ato conjugado e atômico de inserir u
 
 Para que as consultas gRPC entreguem aos painéis dos pesquisadores gráficos perfeitamente sincronizados, isentos de contaminações das séries e saltos matemáticos fictícios, os barramentos de injeção aplicam em profundidade este corolário. Na eventualidade de os \textit{feeders} retransmitirem parcelas horárias previamente já introduzidas, a abordagem \textit{Upsert} consolida a consistência atômica. É, portanto, garantida a premissa de \textit{Idempotência}: requisições idênticas com os mesmos parâmetros reproduzirão exatamente a mesma resultante estável a despeito das eventuais repetições impostas pelo emissor.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Fluxo de ingestão com idempotência via \textit{Upsert}.}
-    \includegraphics[width=\textwidth]{assets/IMG-08.jpg}
+    \includegraphics[width=0.75\textwidth,height=0.3\textheight,keepaspectratio]{assets/IMG-08.jpg}
     \label{fig:fluxo_upsert}
 \end{figure}
 
@@ -137,10 +137,10 @@ Dessa forma, esses \textit{tokens} são distribuídos por um \textit{Backend as 
 
 Com essa proteção validada e autossuficiente via JWT, as interações entre os variados pesquisadores e o grupo diretor principal do LTI ganham controles finamente ajustados de permissão e isolamento granular. Ao invés da tradicional adoção de um gargalo de API Gateway obsoleto centralizando a autorização primária de forma bloqueante, os próprios microsserviços atestam localmente de forma criptográfica (na verificação de chaves assimétricas públicas) a permissão adequada requerida para leitura do \textit{streaming} das cotações.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Autenticação e verificação criptográfica \textit{stateless} com JWT e Supabase.}
-    \includegraphics[width=\textwidth]{assets/IMG-09.jpg}
+    \includegraphics[width=0.75\textwidth,height=0.3\textheight,keepaspectratio]{assets/IMG-09.jpg}
     \label{fig:jwt_supabase}
 \end{figure}
 
@@ -154,9 +154,9 @@ Esse novo cenário abre margem para a consolidação do uso de estratégias de o
 
 Dessa forma, a adoção de um \textit{pipeline} de CI robusto e automatizado, utilizando ferramentas como GitHub Actions, Jenkins ou GitLab CI/CD, é imperativa para o sucesso do projeto. O \textit{pipeline} deve incluir etapas de construção, testes automatizados (unitários, de integração e de regressão), análise estática de código e validação de segurança. Isso assegura que cada alteração no código seja rigorosamente verificada antes de ser integrada ao ramo principal, mantendo a estabilidade e a qualidade do sistema à medida que ele evolui. Como dito antes, tal fato não era tão evidente no estado inicial do ecossistema, pois existem apenas três aplicações: (1) qDATA, (2) MT5-Websocket-Bridge, e (3) o \textit{dashboard}. Todavia, à medida que o projeto cresce e mais componentes são adicionados – como o (4) Serviço de Simulações com Bootstrapping – a importância de um \textit{pipeline} de CI bem estruturado se torna ainda mais crítica para garantir a coesão e a integridade do sistema como um todo.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Pipeline de integração contínua e \textit{deploy} automatizado no GitHub Actions.}
-    \includegraphics[width=\textwidth]{assets/IMG-10.jpg}
+    \includegraphics[width=0.75\textwidth,height=0.3\textheight,keepaspectratio]{assets/IMG-10.jpg}
     \label{fig:pipeline_ci_deploy}
 \end{figure}

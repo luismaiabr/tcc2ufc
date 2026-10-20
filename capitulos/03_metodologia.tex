@@ -24,13 +24,6 @@ Vale ressaltar que a plataforma não elimina completamente a dependência de fon
 
 Essas questões guiarão tanto o projeto quanto a implementação da avaliação da solução. A resposta a cada uma delas depende da combinação entre escolha tecnológica, desenho da arquitetura e validação experimental.
 
-\begin{figure}[htb]
-    \centering
-    \caption{Fluxo metodológico ponta a ponta: da coleta externa ao consumo de séries temporais.}
-    \includegraphics[width=\textwidth]{assets/IMG-03.jpg}
-    \label{fig:fluxo_metodologico}
-\end{figure}
-
 \section{Fontes de conhecimento e delimitação do estudo}
 
 Não fazem parte do escopo a execução automática de ordens, a gestão de risco de estratégias de \textit{trading} e o desenvolvimento de ferramentas analíticas finais dos usuários. Nesse contexto, desenvolve-se uma solução de Market Data, isto é, provimento de dados de mercado em alta vazão para recuperação de dados persistidos no banco de dados – inclusive em volumes expressivos (por exemplo, 1 GB de dados) –. Por outro lado, está fora do escopo deste projeto prover dados com latência ultra-baixa (por exemplo, disponibilizados no \textit{broker} em escala de microssegundos) voltados para execução de ordens de \textit{trading} (Order Routing). Convém reiterar: provê-se alta vazão e dados suficientemente recentes para Market Data, mas não direcionados a Order Routing. A construção de um eventual microsserviço de Order Routing para esse ecossistema consiste em uma extensão viável sob a ótica de engenharia de software, contudo tal escopo não é abordado neste trabalho.
@@ -43,6 +36,13 @@ A implementação foi conduzida de forma incremental, partindo de um esboço mac
     \item A utilização de gRPC e gRPC-Web na camada de aplicação da rede para a construção de \textit{endpoints} de alto desempenho voltados à distribuição de dados.
     \item A utilização de um \textit{end-point} REST/HTTPS na camada de aplicação da rede para ingestão de dados (alimentação do sistema de banco de dados)
 \end{enumerate}
+
+\begin{figure}[!htb]
+    \centering
+    \caption{Fluxo metodológico ponta a ponta: da coleta externa ao consumo de séries temporais.}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-03.jpg}
+    \label{fig:fluxo_metodologico}
+\end{figure}
 
 \subsection{Especificação do Contrato de Dados}
 
@@ -124,10 +124,10 @@ O procedimento experimental é composto pelas seguintes etapas:
 
 Esse fluxo permite associar cada decisão de projeto a evidências observáveis, tornando a metodologia coerente com o caráter aplicado do trabalho.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Arquitetura do procedimento experimental e \textit{benchmarking}.}
-    \includegraphics[width=\textwidth]{assets/IMG-04.jpg}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-04.jpg}
     \label{fig:procedimento_experimental}
 \end{figure}
 
@@ -179,13 +179,14 @@ Para a maioria das pesquisas quantitativas desenvolvidas no ambiente universitá
 
 Ressalta-se que, no escopo restrito de desenvolvimento deste Trabalho de Conclusão de Curso, a barreira de atraso não foi codificada no protótipo experimental, uma vez que o objetivo primário da pesquisa concentrou-se na aferição de desempenho, vazão e latência mínima da infraestrutura sob regime de alta frequência. Contudo, como requisito não funcional de governança e segurança jurídica, planejou-se formalmente no \textit{backlog} arquitetural da plataforma a introdução de um módulo de defasagem temporal controlada (mínimo de 15 minutos) antes de qualquer eventual disponibilização externa da API aos demais integrantes do corpo acadêmico.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
     \centering
     \caption{Fronteira regulatória e governança de dados financeiros (B3 versus LTI).}
-    \includegraphics[width=\textwidth]{assets/IMG-11.jpg}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/IMG-11.jpg}
     \label{fig:fronteira_regulatoria}
 \end{figure}
 
+\FloatBarrier
 \subsection{Consulta à Procuradoria Federal da UFC e titularidade institucional}
 
 Com o intuito de mitigar riscos de responsabilidade civil e assegurar que as obrigações contratuais não recaiam sobre os pesquisadores a título individual, planejou-se um conjunto de ações articuladas junto à administração central da universidade:
