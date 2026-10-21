@@ -15,9 +15,11 @@ A partir do estudo acadêmico realizado e do trabalho dedicado a este sistema en
 % - Discuta a dicotomia entre o ganho de desempenho e a facilidade de uso.
 % - Contraste o HTTPS (REST) com o gRPC com base nos resultados obtidos.
 
-Como visto, o uso do protocolo gRPC enquanto interface de API externa voltada a clientes finais (pesquisadores) não trouxe os benefícios práticos esperados em requisições cotidianas de baixo volume. O pequeno volume de dados e o \textit{overhead} de desenvolvimento (construção do código inicial) não compensam, em termos absolutos, a baixíssima curva de aprendizado e a conveniência do protocolo HTTPS. 
+Como visto, o uso do protocolo gRPC enquanto interface de API externa voltada a clientes finais (pesquisadores) não trouxe os benefícios práticos esperados em requisições cotidianas de baixo volume. O pequeno volume de dados e o \textit{overhead} de desenvolvimento (construção do código inicial) não compensam \textit{ainda}, em termos absolutos, a baixíssima curva de aprendizado e a conveniência do protocolo HTTPS. 
 
-No entanto, em cenários de alta demanda e tráfego massivo, a latência média do gRPC reduziu-se à metade em comparação ao HTTPS, comprovando reais ganhos de \textit{throughput}. Fica claro que existe um forte \textit{trade-off} entre a conveniência para prototipação (HTTPS) e o alto desempenho de rede (gRPC).
+No entanto, em cenários de alta demanda e tráfego massivo, a latência média do gRPC reduziu-se à metade em comparação ao HTTPS, comprovando reais ganhos de \textit{throughput}. Fica claro que existe um forte \textit{trade-off} entre a conveniência para prototipação (HTTPS) e o alto desempenho de rede (gRPC). 
+
+Uma questão crítica a se destacar, com respeito a trabalhos futuros, é que em aplicações de altíssimo desempenho, a adoção de uma arquitetura Feed Handler torna-se um padrão de mercado de altíssima valia. Nesse sentido, conector um agente de cálculos e inferências a um motor de obtenção de dados (Metatrader, DMA2, etc) é um gravíssimo anti-padrão de mercado.
 
 Em suma, percebe-se que o gRPC é mais adequado para comunicações menos dinâmicas, não sendo adequado para utilização em experimentos. Apesar do insucesso na utilização desse protocolo em uma API pública, o conhecimento adquirido foi extremamente proveitoso, e futuramente será utilizado para comunicação entre APIs de interface interna utilizadas no laboratório.
 

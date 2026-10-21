@@ -33,7 +33,7 @@ No que tange à distribuição técnica dos dados, o protocolo \textit{gRPC Remo
 
 À medida que a ferramenta avançou em produção, membros do projeto passaram a utilizá-la como base para construir serviços quantitativos auxiliares, tais como cálculos de correlações com \textit{bootstrapping}, experimentos em Python de trabalhos teóricos conduzidos no projeto, e rotinas de identificação de anomalias. Esse cenário reforça o desenho de um ecossistema coeso de serviços e análises de apoio.
 
-Por fim, cabe ressaltar que a plataforma qData é uma ferramenta de uso estritamente interno ao Laboratório de Tecnologias Inovadoras (LTI). Ela não configura um serviço comercial de distribuição de dados de mercado para terceiros externos. Assim, estabelece-se uma rigorosa política de não revenda, não sublicenciamento e não disponibilização pública dos dados obtidos. Assim, é necessária a realização de um estudo sobre o uso da fonte de dados (XP Invesimtimentos) pelo LTI (ou LTI Finanças) enquanto entidade jurídica singular. Esse requisito de compliance reflete-se no gerenciamento granular de permissões de acesso, que foi configurada de maneira detalhada em um banco de gerenciamento de acessos feitos no Supabase. A implantação de contêineres individuais para aquisição de dados será, futuramente, discutida com o responsável pelo mt5bridge.
+Por fim, cabe ressaltar que a plataforma qData é uma ferramenta de uso estritamente interno ao Laboratório de Tecnologias Inovadoras (LTI). Ela não configura um serviço comercial de distribuição de dados de mercado para terceiros externos. Assim, estabelece-se uma rigorosa política de não revenda, não sublicenciamento e não disponibilização pública dos dados obtidos. Assim, é necessária a realização de um estudo sobre o uso da fonte de dados (XP Invesimtimentos) pelo LTI (ou LTI Finanças) enquanto entidade jurídica singular. Esse requisito de compliance reflete-se no gerenciamento granular de permissões de acesso, que foi configurada de maneira detalhada em um banco de gerenciamento de acessos feitos no Supabase. A implantação de contêineres individuais para aquisição de dados será, futuramente, discutida com o responsável pelo mt5bridge. Mais tarde, veremos que em trabalhos futuros a utilização de uma Rede Virtual Privada deverá substituir a abordagem de acesso via Internet.
 
 A arquitetura do ecossistema de microsserviços promove o princípio de \textbf{Separação de Responsabilidades} (\textit{Separation of Concerns}): o qData concentra-se exclusivamente no fornecimento dos dados como serviço compartilhado, enquanto as ferramentas dos pesquisadores — painéis analíticos, algoritmos de ordens de \textit{trading} e modelos estatísticos — focam em suas lógicas específicas. Isso elimina acoplamentos indesejados e permite que diferentes membros do LTI e projetos da UFC utilizem essa infraestrutura de dados sem redundâncias.
 
@@ -61,10 +61,10 @@ O acesso à plataforma é protegido por autenticação baseada em \textit{JSON W
 \FloatBarrier
 \section{Escopo}
 
-A plataforma qDATA abrange a ingestão de dados de corretoras selecionadas, o armazenamento e a distribuição desses dados para consumidores internos do grupo de pesquisa LTI, com foco no projeto \textit{Análise de Séries Financeiras}. Dentro do escopo técnico estão a comunicação com um software de aquisição de barras \textit{Open, High, Low, Close} (OHLC), o armazenamento otimizado com hyper-tabelas através do TimeScale — o que viabiliza a entrega de dados em alta velocidade aos consumidores autorizados — e a disponibilização desses dados via HTTPS, visando cenários que exigem praticidade e agilidade no desenvolvimento de aplicações.
+A plataforma qData abrange a ingestão de dados de corretoras selecionadas, o armazenamento e a distribuição desses dados para consumidores internos do grupo de pesquisa LTI, com foco no projeto \textit{Análise de Séries Financeiras}. Dentro do escopo técnico estão a comunicação com um software mt5brdige, de aquisição de barras \textit{Open, High, Low, Close} (OHLC); o armazenamento otimizado com hyper-tabelas através do TimescaleDB, que viabiliza o acesso de dados em alta velocidade por meio da API; e a disponibilização desses dados via APIs externas rodando sobre três opções de protocolo de comunicação. A disponibilização de mais de um protocolo visa atender a demandas de alta velocidade para soluções back-end (protocolo gRPC), alta velocidade em aplicações web (protocolos gRPC-web), ou implementação agilizada de conexão (protocolo HTTPS).
 
 
-Ao longo deste trabalho, também são analisadas as políticas de acesso a dados, o registro e ativação de usuários, o gerenciamento de contas do projeto e outras questões de segurança que impactam diretamente a ferramenta qDATA e o ecossistema como um todo. Assim, partindo da ferramenta qDATA como elemento central, o escopo se expande radialmente para uma visão arquitetural mais ampla, englobando o apoio ao gerenciamento do projeto \textit{LTI Finanças}.
+Ao longo deste trabalho, também são analisadas as políticas de acesso a dados (compliance), o registro e ativação de usuários, o gerenciamento granular de permissões, a segurança da infraestrutura e da aplicação, e o ecossistema de outras aplicações associado ao qDATA. Assim, escopo do projeto é a provisão de dados em alta velocidade a partir de um núcleo central, construído com base nos padrões-ouro da engenharia de software. Por fim, a proposta constituir um tipo de Market Data System, utilizando a arquitetura Feede Handler, que é padrão-ouro no mercado em se tratando de aquisição de dados, armazenamento dos dados, e distribuição para os consumidores da rede local.
 
 \begin{figure}[H]
     \centering
@@ -73,23 +73,29 @@ Ao longo deste trabalho, também são analisadas as políticas de acesso a dados
     \label{fig:demandas_nucleo}
 \end{figure}
 
-Por outro lado, estão categoricamente fora do escopo desta plataforma: a execução de ordens de compra e venda nas corretoras, a gestão de risco financeiro e o desenvolvimento de interfaces de \textit{trading} para usuários finais. O qData atua exclusivamente como infraestrutura de dados, cabendo à lógica de análise e negociação permanecer sob a estrita responsabilidade de cada ferramenta ou pesquisador consumidor.
+Por outro lado, estão categoricamente fora do escopo desta plataforma: 
+
+\begin{itemize}
+    \item o envio de requisições para dentro do container do mt5bridge (por exemplo: execução de ordens de compra e venda nas corretoras pelo Metatrader5, que está dentro do container), 
+    \item o processamento agregado e utilização dos dados consumidos no qData (enquanto provedor de dados, o qData não está interessado em \textit{como} os dados serão utilizados)
+\end{itemize}
 
 \section{Objetivos}
 
 \subsection{Objetivo Geral}
 
-Projetar e implementar uma plataforma de dados financeiros centralizada e orientada à disponibilidade para o projeto \textit{Análise de Séries Financeiras} do LTI.
+Projetar e implementar uma plataforma centralizada e de alta disponibilidade para distribuição de séries temporais financeiras em rede local para o projeto \textit{Análise de Séries Financeiras} do LTI.
 
 \subsection{Objetivos Específicos}
 
 \begin{itemize}
-    \item Consumir a plataforma com os \textit{containers} Docker de aquisição de dados do MetaTrader 5 (MT5), os quais operam em ambiente Linux utilizando Wine;
-    \item Desenvolver o núcleo de ingestão e armazenamento de dados empregando o \textit{framework} FastAPI e o banco de dados PostgreSQL, mediado por protocolo HTTPS REST;
-    \item Implementar serviços de distribuição de dados aos consumidores utilizando os protocolos gRPC, gRPC-web e HTTPS;
+    \item Implementar um núcleo de ingestão e armazenamento de dados utilizando o \textit{framework} FastAPI e o banco de dados PostgreSQL
+    \item Receber dados oriundos da solução \textit{mt5bridge}, desenvolvida por \citeonline{oliveira2026} para obter dados de mercado com atraso mínimo e extremamente atuais.
+    \item Implementar serviços de distribuição de dados aos consumidores utilizando os protocolos gRPC, gRPC-web e HTTPS, disponibilizando-os em uma rede local interna do LTI Finanças;
     \item Estabelecer mecanismos iniciais para a garantia de disponibilidade, abrangendo a implementação de testes unitários (via \texttt{pytest}) e a implementação de fluxos de integração contínua (GitHub Actions), que utilizam estes testes.
     \item Comparar o desempenho das interfaces de distribuição (gRPC, gRPC-Web e HTTPS) em termos de latência e consumo de banda
-    \item Documentar formalmente as políticas de controle de acesso e versionamento como prática basilar de governança de TI;
+    \item Documentar formalmente as políticas de controle de acesso
+    \item Discutir políticas de compliance para distribuição de dados, mediante pesquisa e também por meio de contato direto com a B3 (porém, a implementação de um sistema de compliance está fora do escopo deste trabalho)
 \end{itemize}
 
 \newpage
