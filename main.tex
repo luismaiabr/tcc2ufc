@@ -1,79 +1,113 @@
+% ==========================================================
+% TCC - UFC Campus de Russas
+% Formatação baseada no template UFC (template/template/documento.tex)
+% Compilação: pdflatex -> bibtex -> pdflatex -> pdflatex
+% ==========================================================
 \documentclass[
-	12pt,
-	openright,
-	twoside,
-	a4paper,
-	english,
-	french,
-	spanish,
-	brazilian
-	]{abntex2}
+    a4paper,          % Tamanho da folha A4
+    12pt,             % Tamanho da fonte 12pt
+    chapter=TITLE,    % Capítulos em caixa alta
+    section=Title,    % Seções com caixa alta somente na primeira letra
+    subsection=Title, % Subseções com caixa alta somente na primeira letra
+    oneside,          % Impressão em apenas uma face do papel
+    english,          % Hifenizações em inglês
+    spanish,          % Hifenizações em espanhol
+    brazil,           % Último idioma é o idioma padrão do documento
+    fleqn             % Equações alinhadas à esquerda
+]{abntex2}
 
-\usepackage{lmodern}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{indentfirst}
-\usepackage{color}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{placeins}
-\usepackage{siunitx}
-\usepackage{listings}
-\usepackage{microtype}
-\usepackage{lipsum}
-\usepackage{verbatim}
-\usepackage{framed}
-\usepackage[brazilian,hyperpageref]{backref}
-\usepackage[alf]{abntex2cite}
+% Preâmbulo do template UFC (pacotes, fontes, abntex2cite, ufctex)
+\input{lib/preambulo}
 
-% Informações de dados para CAPA e FOLHA DE ROSTO
-\titulo{ARQUITETANDO O NÚCLEO DE DADOS DE UM ECOSSISTEMA DE ANÁLISE SÉRIES TEMPORAIS FINANCEIRAS}
+\setlength{\mathindent}{0pt} % Alinhamento de equações totalmente à esquerda
+
+% ----------------------------------------------------------
+% Pacotes adicionais exigidos pelos capítulos originais
+% (não existentes no preâmbulo do template)
+% ----------------------------------------------------------
+\usepackage{float}       % Posicionamento [H] de figuras/tabelas
+\usepackage{placeins}    % \FloatBarrier
+\usepackage{siunitx}     % Unidades
+\usepackage{framed}      % Ambiente framed (Anexo)
+\definecolor{Green}{rgb}{0,0.6,0.2} % Cor usada pelo \lstset do ufctex.sty
+
+% Nível do trabalho acadêmico
+\trabalhoacademico{tccgraduacao}
+\ehqualificacao{nao}
+\removerbordasdohyperlink{sim}
+
+% ----------------------------------------------------------
+% Informações da instituição
+% ----------------------------------------------------------
+\ies{Universidade Federal do Ceará}
+\iessigla{UFC}
+\centro{Campus de Russas}
+\departamento{Departamento de Computação}
+
+% Informações para TCC de Graduação
+\graduacaoem{Engenharia de Software}
+\habilitacao{bacharel}
+
+% ----------------------------------------------------------
+% Informações relacionadas ao trabalho
+% ----------------------------------------------------------
 \autor{LUIS ANTÔNIO MAIA SOMBRA}
-\local{RUSSAS}
+\titulo{ARQUITETANDO O NÚCLEO DE DADOS DE UM ECOSSISTEMA DE ANÁLISE SÉRIES TEMPORAIS FINANCEIRAS}
 \data{2026}
+\local{RUSSAS}
+\dataaprovacao{\underline{\hspace{3cm}}}
+
+% Orientador
 \orientador{Prof. Ms. Pitágoras Graça Martins}
-\instituicao{%
-  UNIVERSIDADE FEDERAL DO CEARÁ
-  \par
-  CAMPUS DE RUSSAS
-  \par
-  DEPARTAMENTO DE COMPUTAÇÃO
-  \par
-  CURSO DE GRADUAÇÃO EM ENGENHARIA DE SOFTWARE}
-\tipotrabalho{Trabalho de Conclusão de Curso}
-\preambulo{Trabalho de Conclusão de Curso apresentado ao Curso de Graduação em Engenharia de Software do Campus de Russas da Universidade Federal do Ceará, como requisito parcial à obtenção do grau de bacharel em Engenharia de Software.}
+\orientadories{Universidade Federal do Ceará (UFC)}
+\orientadorcentro{Campus de Russas}
+\orientadorfeminino{nao}
+
+% Coorientador (vazio = removido do documento)
+\coorientador{}
+
+% Banca examinadora
+\membrodabancadois{Prof. Dr. Marcos Vinicius de Andrade Lima}
+\membrodabancadoisies{Universidade Federal do Ceará (UFC)}
+\membrodabancatres{Drª. Rosineide Fernando da Paz}
+\membrodabancatresies{Universidade Federal do Ceará (UFC)}
+
+% ----------------------------------------------------------
+% Ambientes pré-textuais do trabalho original, com o
+% posicionamento do template (caixa à direita, 8 cm)
+% ----------------------------------------------------------
+\renewenvironment{dedicatoria}{%
+    \vspace*{\fill}\hspace*{-2cm}\hspace*{8cm}\begin{minipage}{8cm}%
+}{%
+    \end{minipage}\pagebreak%
+}
+\renewenvironment{epigrafe}{%
+    \vspace*{\fill}\hspace*{-2cm}\hspace*{8cm}\begin{minipage}{8cm}%
+}{%
+    \end{minipage}\pagebreak%
+}
 
 \begin{document}
 
-\selectlanguage{brazilian}
-\frenchspacing
+\selectlanguage{brazil}
 
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
 % ----------------------------------------------------------
 \imprimircapa
-\imprimirfolhaderosto
-
-% Inserir folha de aprovação
-\input{pre_textuais/folha_aprovacao}
+\imprimirfolhaderosto{}
+\imprimirfolhadeaprovacao
 \input{pre_textuais/dedicatoria}
 \input{pre_textuais/agradecimentos}
 \input{pre_textuais/epigrafe}
 \input{pre_textuais/resumo}
 \input{pre_textuais/abstract}
+\renewcommand*\listfigurename{Lista de Figuras}
+\imprimirlistadeilustracoes
+\imprimirlistadetabelas
+\imprimirsumario
 
-% Listas e Sumário
-\pdfbookmark[0]{\listfigurename}{lof}
-\listoffigures*
-\cleardoublepage
-
-\pdfbookmark[0]{\listtablename}{lot}
-\listoftables*
-\cleardoublepage
-
-\pdfbookmark[0]{\contentsname}{toc}
-\tableofcontents*
-\cleardoublepage
+\setcounter{table}{0}% Antes da primeira tabela
 
 % ----------------------------------------------------------
 % ELEMENTOS TEXTUAIS
@@ -89,7 +123,6 @@
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
 % ----------------------------------------------------------
-\postextual
 \bibliography{referencias}
 
 % ----------------------------------------------------------
