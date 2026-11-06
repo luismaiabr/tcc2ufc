@@ -1,6 +1,6 @@
 \chapter{FUNDAMENTAÇÃO TEÓRICA}
 
-Este capítulo tem como objetivo apresentar os conceitos teóricos, padrões arquiteturais e tecnologias que embasam o desenvolvimento da plataforma qDATA. Ao longo das próximas seções, discutem-se as bases fundamentais necessárias para a compreensão das escolhas metodológicas detalhadas posteriormente, contextualizando-as no cenário de engenharia de software voltada a sistemas de alta disponibilidade e baixa latência.
+Este capítulo tem como objetivo apresentar os conceitos teóricos, padrões arquiteturais e tecnologias que embasam o desenvolvimento da plataforma qData. Ao longo das próximas seções, discutem-se as bases fundamentais necessárias para a compreensão das escolhas metodológicas detalhadas posteriormente, contextualizando-as no cenário de engenharia de software voltada a sistemas de alta disponibilidade e baixa latência.
 
 Dada a natureza do problema do LTI, que exige a ingestão contínua de grandes volumes de dados financeiros (barras OHLC) e seu consumo em atividades internas do LTI, a infraestrutura projetada baseia-se fortemente em práticas modernas da indústria. Discorre-se sobre como conceitos consolidados, como microsserviços, conteinerização e comunicação híbrida via protocolos eficientes, sustentam os requisitos operacionais sem comprometer a estabilidade do serviço.
 
@@ -8,9 +8,7 @@ Dada a natureza do problema do LTI, que exige a ingestão contínua de grandes v
 
 O FinHub é um ecossistema abrangente desenvolvido no âmbito do Laboratório de Tecnologias Inovadoras (LTI). Trata-se de um sistema amplo que orquestra múltiplos serviços e componentes para viabilizar a pesquisa quantitativa avançada. A Figura \ref{fig:ecossistema_finhub} ilustra a arquitetura conceitual e a interação entre os diversos elementos que compõem este ambiente.
 
-Neste trabalho, adota-se como ponto de partida inicial o componente qDATA, dedicando a ele um enfoque predominantemente técnico. Contudo, conserva-se a perspectiva sistêmica de que o qDATA, embora seja um componente individual, desempenha um papel central e, portanto, precisa se relacionar adequadamente com os demais serviços do ecossistema. O sucesso de sua implementação depende da interoperabilidade harmoniosa com módulos como o \textit{feeder}, os painéis de visualização (\textit{dashboards}) e os futuros serviços de simulação.
-
-Ademais, ressalta-se que o presente estudo consolida as bases infraestruturais. Um trabalho futuro (TCC2) dará ênfase a aspectos mais amplos, como governança de TI, aprofundamento na arquitetura de microsserviços e práticas de \textit{Product Ownership}, garantindo que a evolução do ecossistema FinHub ocorra de forma gerenciada, escalável e alinhada às necessidades estratégicas dos pesquisadores envolvidos.
+Neste trabalho, adota-se como ponto de partida inicial o componente qDATA, dedicando a ele um enfoque predominantemente técnico. Contudo, conserva-se a perspectiva sistêmica de que o qDATA, embora seja um componente individual, desempenha um papel central enquanto receptor e distribuidor de dados, portanto, precisa se relacionar adequadamente com os demais serviços do ecossistema. O sucesso de sua implementação depende da interoperabilidade harmoniosa com módulos como o \textit{feeder}, os painéis de visualização (\textit{dashboards}) e os futuros serviços de simulação.
 
 \begin{figure}[!htb]
     \centering
