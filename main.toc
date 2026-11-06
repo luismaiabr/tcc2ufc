@@ -67,9 +67,9 @@
 \contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{CONCLUSÕES E TRABALHOS FUTUROS}}{61}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Considerações Finais e Cumprimento dos Objetivos}{61}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Análise Técnica: Performance vs. Conveniência}{61}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Impactos Organizacionais no LTI Finanças}{61}{section.6.3}%
+\contentsline {section}{\numberline {6.3}Impactos Organizacionais no LTI Finanças}{62}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Trabalhos Futuros}{62}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Pilar Regulatório e de \textit {Compliance} (B3)}{62}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.1}Pilar Regulatório e de \textit {Compliance} (B3)}{63}{subsection.6.4.1}%
 \contentsline {subsection}{\numberline {6.4.2}Pilar de Arquitetura e Segurança de Rede}{63}{subsection.6.4.2}%
 \contentsline {subsection}{\numberline {6.4.3}Plano de Ação e Marcos para Trabalhos Futuros}{64}{subsection.6.4.3}%
 \vspace {\cftbeforechapterskip }
