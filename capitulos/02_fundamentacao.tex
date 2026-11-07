@@ -46,15 +46,24 @@ Nesse contexto, no que tange aos \textit{stakeholders} do projeto, tem-se a poss
 Parou aqui 06/11/2026
 \end{comment}
 \section{Contêineres e Docker}
-A conteinerização revolucionou a implantação de software ao oferecer uma virtualização em nível de sistema operacional (processo). O Docker despontou como a principal ferramenta para essa prática, permitindo que desenvolvedores empacotem uma aplicação com todas as suas dependências, bibliotecas e arquivos de configuração necessários em um único artefato portável \cite{merkel2014docker}.
+A conteinerização revolucionou a implantação de software ao oferecer uma virtualização em nível de sistema operacional (processo). O Docker despontou como a principal ferramenta para essa prática, permitindo que desenvolvedores empacotem uma aplicação com todas as suas dependências, bibliotecas e arquivos de configuração necessários em um único artefato portável \cite{merkel2014docker}. Utilizando Docker para containerização, o processo de implantação se resume ao (1) download no serviço no GitHub, (2) colocar as variáveis de ambiente dentro da pasta do serviço e (3) executar do comando 'docker compose up -d --build'. Isto é suficiente para que o serviço entre em operação.
 
 Um dos maiores ganhos operacionais da utilização de contêineres é o princípio conhecido como "\textit{build once, run anywhere}" (construa uma vez, execute em qualquer lugar). Na prática, se o contêiner funciona no ambiente de desenvolvimento, seu comportamento será idêntico nos ambientes de teste, homologação e produção, erradicando a clássica síndrome do "na minha máquina funciona". Essa previsibilidade minimiza substancialmente o esforço logístico em implantações complexas.
 
-No desenvolvimento do projeto, o Docker permite empacotar o código do banco de dados e o código do ASGI (FastAPI) sem expor a máquina hospedeira a configurações conflitantes, além de permitir rápida manutenção do banco de dados e \textit{deploys} mais seguros.
+Por fim, ao realizar conteinerização com Docker permite a criação de redes virtuais dentro da infraestrutura Docker. Isso permite assegurar que determinados serviços sejam isolados uns dos outros, ou que a exposição de portas à Internet seja feita de maneira segura utilizando um proxy reverso, tal como Nginx (tradicional) ou Traefik (moderno). Por fim, permite orquestração das aplicações via Docker Compose (para projetos de pequena escala) ou Kubernetes (para projetos de larga escala).
 
+\begin{figure}[!htb]
+    \centering
+    \caption{Topologia da rede Docker}
+    \includegraphics[width=\textwidth,height=0.32\textheight,keepaspectratio]{assets/uptoken_network_topologia_docker.png}
+    \label{fig:uptoken_network_topologia_docker}
+\end{figure}
+\begin{comment} 
+Fonte original do diagrama de redes Docker: https://claude.ai/chat/8d67e1e9-f246-4644-90a3-5d96c57ecb50
+\end{comment}
 \subsection{Compatibilidade de Binários em Ambientes Linux (Wine)}
 
-Ainda dentro do domínio da infraestrutura de contêineres, surge frequentemente a necessidade de compatibilizar binários compilados exclusivamente para a plataforma Windows em ambientes operacionais baseados em Linux. O MT5, terminal frequentemente mandatório para conexão com corretoras brasileiras (como XP, Rico e Clear), possui versões nativas unicamente para o ecossistema da Microsoft.
+Ainda dentro do domínio da infraestrutura de contêineres, uma das propostas do presente trabalho é comunicar-se com software de aquisição de dados do tipo "headless". Utilizando como base de aquisição de dados MetaTrader, um desafio para o software que envia dados para o qData foi compatibilizar binários compilados exclusivamente para a plataforma Windows em ambientes operacionais baseados em Linux. O MT5, terminal frequentemente mandatório para conexão com corretoras brasileiras (como XP, Rico e Clear), possui versões nativas unicamente para o ecossistema da Microsoft.
 
 Para contornar tal barreira no Linux, convenciona-se utilizar a camada de compatibilidade Wine (\textit{Wine Is Not an Emulator}). Trata-se de um software que traduz as chamadas de sistema (API) do Windows para equivalentes no padrão \textit{Portable Operating System Interface} (POSIX) do Linux em tempo real, evitando os atrasos de desempenho característicos de emuladores convencionais ou máquinas virtuais pesadas \cite{winehq2026}.
 
@@ -67,12 +76,14 @@ Para contornar tal barreira no Linux, convenciona-se utilizar a camada de compat
 
 \section{Separação de Preocupações (Separation of Concerns)}
 
-O princípio da Separação de Preocupações, originário dos primórdios da Ciência da Computação, determina que um sistema deve ser estruturado em seções distintas, onde cada seção lida com um conjunto específico e delineado de informações e tarefas. Um módulo deve ter uma, e apenas uma, razão primária para sofrer modificações.
+O princípio da Separação de Preocupações, originário dos primórdios da Ciência da Computação, determina que um sistema deve ser estruturado em seções distintas, onde cada seção lida com um conjunto específico e delineado de informações e tarefas. Um módulo deve ter uma, e apenas uma, razão primária para sofrer modificações. Em sistemas distribuídos modernos, aplicar esse princípio significa evitar componentes "Deus", isto é, objetos ou serviços que sabem e fazem demais, um fenômeno discutido nas aulas de Programação Orientada a Objetos. 
 
-Em sistemas distribuídos modernos, aplicar esse princípio significa evitar componentes "Deus", isto é, objetos ou serviços que sabem e fazem demais, um fenômeno discutido nas aulas de Programação Orientada a Objetos. Ao delegar as preocupações de obtenção de dados de mercado para um sistema dedicado, libera-se a ferramenta consumidora da tarefa de gerenciar autenticações complexas de API ou manter a resiliência de \textit{sockets} contínuos, focando unicamente na análise dos dados em si. Mais do que isso: essa arquitetura permitiu delegar a responsabilidade do "Departamento de Aquisição de Dados" (figura de linguagem) a um gerente dedicado especificamente a isso.
+Ao delegar as preocupações de obtenção de dados de mercado para um sistema dedicado, libera-se a ferramenta consumidora da tarefa de gerenciar autenticações complexas de API ou manter a resiliência de \textit{sockets} contínuos, focando unicamente na análise dos dados em si. Mais do que isso: essa arquitetura permitiu delegar a responsabilidade do "Departamento de Aquisição de Dados" (figura de linguagem) a um gerente dedicado especificamente a isso. Nesse sentido, é possível criar uma diretriz de engenharia de software para o qData: tal aplicação apenas receber, armazena e distribui dados internamente, e quaisuqer outros serviços do qData devem necessariamente serem serviços-suporte ou "middlewares" (exemplo: autenticação, observabilidade, etc).
 
-No domínio do Laboratório de Tecnologias Inovadoras, a adoção incisiva deste conceito molda a justificativa central do trabalho. O qData concentra-se puramente em agir como infraestrutura de dados compartilhada (\textit{Market Data}). A lógica de análise quantitativa, o treinamento de modelos estocásticos e a execução de ordens nas corretoras permanecem estritamente sob responsabilidade do cliente (\textit{researcher}). Essa fronteira rígida protege o núcleo do sistema de \textit{bugs} advindos de modelos preditivos em fase de experimentação.
-
+Dessa maneira, definimos o qData como infraestrutura de dados (\textit{Market Data}). No domínio do Laboratório de Tecnologias Inovadoras. Seguindo a lógica da diretriz citada anteriormente, e o escopo fechado de dados do tipo Market Data, é imediato que lógica de análise quantitativa, o treinamento de modelos estocásticos e a execução de ordens nas corretoras permanecem estritamente sob responsabilidade dos \textit{clients} (usuários finais do serviço). Essa fronteira rígida dá um melhor direcionamento ao qData ao produto. De um ponto de vista de Administração, podemos dizer que o gerenciamento do produto sob a ótica das quatro funções da administração (FAYOL, 1916) se torna mais claro no eixo "Direção". Isso contribui para que o direcionamento do produto e sua evolução se deem no sentido de produção de uma ferramenta de market data progressivamente melhor.
+\begin{comment}
+Revisado até aqui. 07/11/2026
+\end{comment}
 \section{Protocolos de Comunicação: REST/HTTP e gRPC}
 
 A intercomunicação eficaz é o coração de qualquer arquitetura de serviços distribuídos. O REST (\textit{Representational State Transfer}), introduzido por \citeonline{fielding2000}, tornou-se o padrão \textit{de facto} na web, caracterizado por sua operação \textit{stateless} sobre HTTP e pela ampla adoção global por sua clareza de uso. Contudo, em virtude de tradicionalmente carregar respostas verbosas em texto \textit{JavaScript Object Notation} (JSON) e depender de conexões repetidas no HTTP/1.1, a comunicação REST costuma esbarrar em gargalos quando exigida baixa latência e alta vazão (milhões de eventos por minuto).
