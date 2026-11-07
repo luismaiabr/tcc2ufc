@@ -19,7 +19,7 @@
 \contentsline {section}{\numberline {2.3}Coleta de Dados com Tickers Especializados}{23}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Contêineres e Docker}{24}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Compatibilidade de Binários em Ambientes Linux (Wine)}{24}{subsection.2.4.1}%
-\contentsline {section}{\numberline {2.5}Separação de Preocupações (Separation of Concerns)}{25}{section.2.5}%
+\contentsline {section}{\numberline {2.5}Separação de Preocupações (Separation of Concerns)}{26}{section.2.5}%
 \contentsline {section}{\numberline {2.6}Protocolos de Comunicação: REST/HTTP e gRPC}{26}{section.2.6}%
 \contentsline {section}{\numberline {2.7}Bancos de Dados para Séries Temporais: TimescaleDB}{27}{section.2.7}%
 \contentsline {section}{\numberline {2.8}FastAPI e Programação Assíncrona (ASGI)}{28}{section.2.8}%
@@ -73,12 +73,12 @@
 \contentsline {subsection}{\numberline {6.4.2}Pilar de Arquitetura e Segurança de Rede}{56}{subsection.6.4.2}%
 \contentsline {subsection}{\numberline {6.4.3}Plano de Ação e Marcos para Trabalhos Futuros}{57}{subsection.6.4.3}%
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{REFER\^ENCIAS}}{59}{section*.36}%
+\contentsline {chapter}{\MakeTextUppercase []{REFER\^ENCIAS}}{59}{section*.37}%
 \cftinsert {AAA}
 \renewcommand *{\cftappendixname }{ANEXO \space }
 \setlength {\cftpartindent }{\cftlastnumwidth } \setlength {\cftpartnumwidth }{2em}
 \cftinsert {A}
-\contentsline {part}{\uppercase {Anexos}}{60}{section*.37}%
+\contentsline {part}{\uppercase {Anexos}}{60}{section*.38}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}

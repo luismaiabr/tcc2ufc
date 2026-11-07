@@ -6,17 +6,18 @@
 \contentsline {figure}{\numberline {4}{\ignorespaces Banco de usuários no Supabase.}}{17}{figure.caption.13}%
 \contentsline {figure}{\numberline {5}{\ignorespaces Demandas do núcleo de dados.}}{18}{figure.caption.14}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Ecossistema LTI FinHub}}{22}{figure.caption.15}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Execução do MT5 \textit {headless} via Wine em contêiner Linux.}}{25}{figure.caption.16}%
-\contentsline {figure}{\numberline {8}{\ignorespaces HTTP/1.1 (JSON) versus HTTP/2 com gRPC (Protobuf).}}{27}{figure.caption.17}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Particionamento temporal em \textit {chunks} de uma \textit {hypertable}.}}{28}{figure.caption.18}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Fluxo de ingestão com idempotência via \textit {Upsert}.}}{30}{figure.caption.19}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Autenticação e verificação criptográfica \textit {stateless} com JWT e Supabase.}}{31}{figure.caption.20}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Pipeline de integração contínua e \textit {deploy} automatizado no GitHub Actions.}}{33}{figure.caption.21}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Fluxo metodológico ponta a ponta: da coleta externa ao consumo de séries temporais.}}{37}{figure.caption.22}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Arquitetura do procedimento experimental e \textit {benchmarking}.}}{41}{figure.caption.23}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Fronteira regulatória e governança de dados financeiros (B3 versus LTI).}}{45}{figure.caption.24}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Linha do tempo das fases do projeto (\textit {roadmap} 2026).}}{48}{figure.caption.26}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Comparativo de latência média entre protocolos (Cenários 1, 2 e 3a).}}{51}{figure.caption.30}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Vazão de dados (\textit {throughput}) em barras por segundo.}}{51}{figure.caption.31}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Topologia da infraestrutura em produção no laboratório (Traefik e Bitwarden).}}{53}{figure.caption.32}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Topologia futura de segurança \textit {zero-trust} via malha VPN (Tailscale/WireGuard).}}{57}{figure.caption.33}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Topologia da rede Docker}}{25}{figure.caption.16}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Execução do MT5 \textit {headless} via Wine em contêiner Linux.}}{25}{figure.caption.17}%
+\contentsline {figure}{\numberline {9}{\ignorespaces HTTP/1.1 (JSON) versus HTTP/2 com gRPC (Protobuf).}}{28}{figure.caption.18}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Particionamento temporal em \textit {chunks} de uma \textit {hypertable}.}}{29}{figure.caption.19}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Fluxo de ingestão com idempotência via \textit {Upsert}.}}{30}{figure.caption.20}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Autenticação e verificação criptográfica \textit {stateless} com JWT e Supabase.}}{32}{figure.caption.21}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Pipeline de integração contínua e \textit {deploy} automatizado no GitHub Actions.}}{33}{figure.caption.22}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Fluxo metodológico ponta a ponta: da coleta externa ao consumo de séries temporais.}}{37}{figure.caption.23}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Arquitetura do procedimento experimental e \textit {benchmarking}.}}{41}{figure.caption.24}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Fronteira regulatória e governança de dados financeiros (B3 versus LTI).}}{45}{figure.caption.25}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Linha do tempo das fases do projeto (\textit {roadmap} 2026).}}{48}{figure.caption.27}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Comparativo de latência média entre protocolos (Cenários 1, 2 e 3a).}}{51}{figure.caption.31}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Vazão de dados (\textit {throughput}) em barras por segundo.}}{51}{figure.caption.32}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Topologia da infraestrutura em produção no laboratório (Traefik e Bitwarden).}}{53}{figure.caption.33}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Topologia futura de segurança \textit {zero-trust} via malha VPN (Tailscale/WireGuard).}}{57}{figure.caption.34}%
